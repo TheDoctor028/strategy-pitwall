@@ -51,7 +51,7 @@ export class StintsInfoForCar implements IStintsInfo {
 
 
     get lapCount(): number {
-        return this.car.fuelTankSize / this.lap.fuel;
+        return Math.floor(this.car.fuelTankSize / this.lap.fuel);
     }
 
     get lapTimeWithPit(): number {
