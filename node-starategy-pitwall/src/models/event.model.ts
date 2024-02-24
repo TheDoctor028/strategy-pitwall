@@ -72,7 +72,7 @@ export class RaceEvent implements IEvent {
 
 
     get raceStart(): Date {
-        return add(new Date(this.raceStartSim), {minutes: this.greenFlagOffset});
+        return add(new Date(this.sessionStart), {minutes: this.greenFlagOffset});
     }
 
     get raceEnd(): Date {
@@ -88,6 +88,6 @@ export class RaceEvent implements IEvent {
     }
 
     get todOffset(): number {
-        return this.raceStartSim.getTime() - this.raceStart.getTime();
+        return (this.raceStartSim.getTime() - this.raceStart.getTime()) / (60 * 1000);
     }
 }
