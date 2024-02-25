@@ -10,7 +10,8 @@
   "type": "commonjs",
   "scripts": {
     "test": "jest --coverage",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "dev": "tsc -w -p ."
   },
   "author": "TheDoctor",
   "license": "ISC",
