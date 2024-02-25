@@ -1,0 +1,60 @@
+import {Col, Container, Row} from "react-bootstrap";
+import {IEvent} from "node-strategy-pitwall";
+import {EventCard} from "../components/EventCard.tsx";
+
+function Home() {
+    const cardData: IEvent[] = [
+        {
+            name: 'Mock Event',
+            series: 'Mock Series',
+            duration: 120,
+            sessionStart: new Date('2022-01-01T10:00:00Z'),
+            sessionEnd: new Date('2022-01-01T12:00:00Z'),
+            greenFlagOffset: 30,
+            raceStart: new Date('2022-01-01T10:30:00Z'),
+            raceEnd: new Date('2022-01-01T12:30:00Z'),
+            raceStartSim: new Date('2022-01-01T10:30:00Z'),
+            raceEndSim: new Date('2022-01-01T12:30:00Z'),
+            todOffset: 0,
+            track: {
+                name: 'Mock Track',
+                length: 5000,
+            },
+            team: {
+                name: 'Mock Team',
+                drivers: [],
+                car: {
+                    name: 'Mock Car',
+                    // @ts-ignore
+                    class: "gt3",
+                    fuelTankSize: 80,
+                },
+                targetStintInfos: {},
+                avgRating: 0,
+                avgDriver: {
+                    availability: null,
+                    name: 'Mock Driver',
+                    rating: 0,
+                    stintPreference: 0,
+                    stintsInfos: {},
+                    utcOffset: 0,
+                }
+            },
+        },
+    ];
+
+    return (
+        <Container>
+            <h1>Events</h1>
+            <Row className="d-flex flex-row">
+                {cardData.map((card, index) => (
+                    <Col key={index} sm={12} md={6} lg={4}>
+                        <EventCard event={card} />
+                    </Col>
+                ))}
+            </Row>
+        </Container>
+    );
+}
+
+export default Home;
