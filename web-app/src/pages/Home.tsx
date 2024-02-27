@@ -1,5 +1,5 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {IEvent} from "node-strategy-pitwall";
+import {CarClass, IEvent} from "node-strategy-pitwall";
 import {EventCard} from "../components/EventCard.tsx";
 
 function Home() {
@@ -25,8 +25,7 @@ function Home() {
                 drivers: [],
                 car: {
                     name: 'Mock Car',
-                    // @ts-expect-error Export of enum is not yet working
-                    class: "gt3",
+                    class: CarClass.GT3,
                     fuelTankSize: 80,
                 },
                 targetStintInfos: {},
