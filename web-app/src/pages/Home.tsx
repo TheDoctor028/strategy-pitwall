@@ -1,7 +1,6 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {IEvent} from "node-strategy-pitwall";
 import {EventCard} from "../components/EventCard.tsx";
-import {RaceEventForm} from "../components/RaceEventForm.tsx";
 
 function Home() {
     const cardData: IEvent[] = [
