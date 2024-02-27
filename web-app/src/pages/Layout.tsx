@@ -3,7 +3,9 @@ import {Outlet} from "react-router-dom";
 function Layout() {
     return (
         <>
-            <Outlet />
+            <div className="m-1">
+                <Outlet />
+            </div>
         </>
     )
 }

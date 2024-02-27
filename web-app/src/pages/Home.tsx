@@ -1,6 +1,7 @@
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {IEvent} from "node-strategy-pitwall";
 import {EventCard} from "../components/EventCard.tsx";
+import {RaceEventForm} from "../components/RaceEventForm.tsx";
 
 function Home() {
     const cardData: IEvent[] = [
@@ -25,7 +26,7 @@ function Home() {
                 drivers: [],
                 car: {
                     name: 'Mock Car',
-                    // @ts-ignore
+                    // @ts-expect-error Export of enum is not yet working
                     class: "gt3",
                     fuelTankSize: 80,
                 },
@@ -46,7 +47,8 @@ function Home() {
     return (
         <Container>
             <h1>Events</h1>
-            <Row className="d-flex flex-row">
+            <Button variant="primary">Create Event</Button>
+            <Row className="d-flex flex-row my-2">
                 {cardData.map((card, index) => (
                     <Col key={index} sm={12} md={6} lg={4}>
                         <EventCard event={card} />
