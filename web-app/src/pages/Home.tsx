@@ -2,6 +2,9 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import {IEvent} from "node-strategy-pitwall";
 import {EventCard} from "../components/EventCard.tsx";
 import {useModal} from "../providers/ModalProvider.tsx";
+import {RaceEventForm} from "../components/RaceEventForm.tsx";
+import {FormikSubmit} from "../components/formik/FormikSubmit.tsx";
+import {Envoy} from "../utils/envoy.ts";
 
 function Home() {
     const cardData: IEvent[] = [
@@ -45,13 +48,15 @@ function Home() {
     ];
 
     const {showModal} = useModal();
+    const submitFormEnvoy = new Envoy();
 
     const openCreateEventModal = () => {
         showModal({
-            body: "",
-            buttons: [],
+            body: <RaceEventForm><FormikSubmit submitFormEnvoy={submitFormEnvoy} /></RaceEventForm>,
+            buttons: [{title: "Add", onClickEvent: "Ok", variant: "success"}],
             onClose(event: string): void {
                 console.log(event);
+                submitFormEnvoy.call();
             },
             title: "Valami"
         })

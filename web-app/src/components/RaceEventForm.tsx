@@ -1,8 +1,8 @@
-import {Button, Container} from "react-bootstrap";
 import * as Formik from "formik";
 import * as yup from "yup";
 import {FormikInput} from "./formik/FormikInput.tsx";
 import {FormikSelect} from "./formik/FormikSelect.tsx";
+import {WithChildren} from "../models/common.ts";
 
 interface RaceEventForm {
     name: string;
@@ -15,7 +15,7 @@ interface RaceEventForm {
     team: string;
 }
 
-export function RaceEventForm() {
+export function RaceEventForm({children}: WithChildren) {
 
     const initialValues: RaceEventForm = {
         name: '',
@@ -62,68 +62,63 @@ export function RaceEventForm() {
     };
 
     return (
-        <Container>
-            <Formik.Formik {...formik}>
-                <Formik.Form>
-                    <FormikInput
-                        name="name"
-                        label="Event Name"
-                        type="text"
-                        placeholder="Name of the event"
-                    />
-                    <FormikInput
-                        name="series"
-                        label="Series"
-                        type="text"
-                        placeholder="Name of the series"
-                    />
-                    <FormikInput
-                        name="duration"
-                        label="Duration"
-                        type="number"
-                        placeholder="Duration of the race in minutes"
-                    />
-                    <FormikInput
-                        name="greenFlagOffset"
-                        label="Green Flag Offset"
-                        type="number"
-                        placeholder="Green flag offset in minutes"
-                        helpText="From session start time to pass until the actual race starts"
-                    />
-                    <FormikInput
-                        name="sessionStart"
-                        label="Session Start"
-                        type="datetime-local"
-                    />
-                    <FormikInput
-                        name="raceStartSim"
-                        label="Race Start Sim"
-                        type="datetime-local"
-                    />
+        <Formik.Formik {...formik}>
+            <Formik.Form>
+                <FormikInput
+                    name="name"
+                    label="Event Name"
+                    type="text"
+                    placeholder="Name of the event"
+                />
+                <FormikInput
+                    name="series"
+                    label="Series"
+                    type="text"
+                    placeholder="Name of the series"
+                />
+                <FormikInput
+                    name="duration"
+                    label="Duration"
+                    type="number"
+                    placeholder="Duration of the race in minutes"
+                />
+                <FormikInput
+                    name="greenFlagOffset"
+                    label="Green Flag Offset"
+                    type="number"
+                    placeholder="Green flag offset in minutes"
+                    helpText="From session start time to pass until the actual race starts"
+                />
+                <FormikInput
+                    name="sessionStart"
+                    label="Session Start"
+                    type="datetime-local"
+                />
+                <FormikInput
+                    name="raceStartSim"
+                    label="Race Start Sim"
+                    type="datetime-local"
+                />
 
-                    <FormikSelect
-                        options={[{value: 0, text: 'Create new Track...'}]}
-                        name="track"
-                        label="Track"
-                    />
-                    {
-                        // TODO add TrackForm here
-                    }
-                    <FormikSelect
-                        options={[{value: 0, text: 'Create new Team...'}]}
-                        name="team"
-                        label="Team"
-                    />
+                <FormikSelect
+                    options={[{value: 0, text: 'Create new Track...'}]}
+                    name="track"
+                    label="Track"
+                />
+                {
+                    // TODO add TrackForm here
+                }
+                <FormikSelect
+                    options={[{value: 0, text: 'Create new Team...'}]}
+                    name="team"
+                    label="Team"
+                />
 
-                    {
-                        // TODO add TeamForm here
-                    }
-
-                    <Button variant="primary" type="submit">
-                        Create
-                    </Button>
-                </Formik.Form>
-            </Formik.Formik>
-        </Container>
+                {
+                    // TODO add TeamForm here
+                }
+                {children}
+            </Formik.Form>
+        </Formik.Formik>
     );
 }
