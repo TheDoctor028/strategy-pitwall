@@ -1,5 +1,5 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {CarClass, IEvent} from "node-strategy-pitwall";
+import {IEvent} from "node-strategy-pitwall";
 import {EventCard} from "../components/EventCard.tsx";
 
 function Home() {
@@ -25,7 +25,8 @@ function Home() {
                 drivers: [],
                 car: {
                     name: 'Mock Car',
-                    class: CarClass.GT3,
+                    // @ts-expect-error - This is a mock object
+                    class: "gt3",
                     fuelTankSize: 80,
                 },
                 targetStintInfos: {},
@@ -43,9 +44,11 @@ function Home() {
     ];
 
     return (
-        <Container>
+        <Container className="w-100">
             <h1>Events</h1>
-            <Button variant="primary">Create Event</Button>
+            <Container className="d-flex flex-row justify-content-end">
+                <Button variant="primary">Create Event</Button>
+            </Container>
             <Row className="d-flex flex-row my-2">
                 {cardData.map((card, index) => (
                     <Col key={index} sm={12} md={6} lg={4}>

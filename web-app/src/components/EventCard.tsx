@@ -24,7 +24,7 @@ export function EventCard({ event }: IEventCardProps) {
                         <strong>Session Start:</strong> {event.sessionStart.toString()}
                     </Card.Text>
                     <Card.Text>
-                        <strong>Race Start Simulation:</strong> {event.raceStartSim.toString()}
+                        <strong>Race Start Sim Time:</strong> {event.raceStartSim.toString()}
                     </Card.Text>
                     <Card.Text>
                         <strong>Team Name:</strong> {event.team.name} ({event.team.car.name}, {event.team.car.class})
