@@ -5,6 +5,7 @@ import {useModal} from "../providers/ModalProvider.tsx";
 import {RaceEventForm} from "../components/RaceEventForm.tsx";
 import {FormikSubmit} from "../components/formik/FormikSubmit.tsx";
 import {Envoy} from "../utils/envoy.ts";
+import {ModalCloseEvent} from "../models/modal.ts";
 
 function Home() {
     const cardData: IEvent[] = [
@@ -53,10 +54,11 @@ function Home() {
     const openCreateEventModal = () => {
         showModal({
             body: <RaceEventForm><FormikSubmit submitFormEnvoy={submitFormEnvoy} /></RaceEventForm>,
-            buttons: [{title: "Add", onClickEvent: "Ok", variant: "success"}],
-            onClose(event: string): void {
+            buttons: [{title: "Add", onClickEvent: ModalCloseEvent.Ok, variant: "success"}],
+            onClose(event) {
                 console.log(event);
                 submitFormEnvoy.call();
+                return true;
             },
             title: "Valami"
         })

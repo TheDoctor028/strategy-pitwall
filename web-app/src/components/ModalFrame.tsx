@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import React from "react";
 import {ButtonVariant} from "react-bootstrap/types";
 import {useModal} from "../providers/ModalProvider.tsx";
+import {ModalCloseEvent} from "../models/modal.ts";
 
 export interface IModalButton {
     title: string;
@@ -12,7 +13,12 @@ export interface IModalButton {
 
 export interface IModalFrameProps {
     title: string;
-    onClose: (event: string) => void;
+    /**
+     * Function to call when the modal is closed.
+     * If the function returns false, the modal will not close.
+     * @param event - The event that caused the modal to close.
+     */
+    onClose: (event: string | ModalCloseEvent) => boolean;
     body: React.ReactNode;
     buttons: IModalButton[];
 }
@@ -21,12 +27,11 @@ export function ModalFrame({ props, show }: {props: IModalFrameProps, show: bool
     const {closeModal} = useModal();
 
     const handleOnClose = (event: string) => () => {
-        props.onClose(event);
-        closeModal();
+        if(props.onClose(event)) closeModal();
     }
 
     return (
-        <Modal show={show} onHide={handleOnClose("default")}>
+        <Modal show={show} onHide={handleOnClose(ModalCloseEvent.Default)}>
             <Modal.Header closeButton>
                 <Modal.Title>{props.title}</Modal.Title>
             </Modal.Header>
