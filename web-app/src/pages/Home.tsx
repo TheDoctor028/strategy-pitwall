@@ -48,17 +48,21 @@ function Home() {
         },
     ];
 
-    const {showModal} = useModal();
+    const {showModal, closeModal} = useModal();
     const submitFormEnvoy = new Envoy();
 
     const openCreateEventModal = () => {
         showModal({
-            body: <RaceEventForm><FormikSubmit submitFormEnvoy={submitFormEnvoy} /></RaceEventForm>,
+            body: <RaceEventForm onSubmit={() => {closeModal();}}><FormikSubmit submitFormEnvoy={submitFormEnvoy} /></RaceEventForm>,
             buttons: [{title: "Add", onClickEvent: ModalCloseEvent.Ok, variant: "success"}],
             onClose(event) {
-                console.log(event);
-                submitFormEnvoy.call();
-                return true;
+                switch (event) {
+                    case ModalCloseEvent.Ok:
+                        submitFormEnvoy.call();
+                        return false;
+                    default:
+                        return true;
+                }
             },
             title: "Valami"
         })

@@ -15,7 +15,7 @@ interface RaceEventForm {
     team: string;
 }
 
-export function RaceEventForm({children}: WithChildren) {
+export function RaceEventForm({children, onSubmit }: WithChildren & { onSubmit: (values: RaceEventForm) => void }) {
 
     const initialValues: RaceEventForm = {
         name: '',
@@ -56,9 +56,7 @@ export function RaceEventForm({children}: WithChildren) {
     const formik = {
         validationSchema,
         initialValues,
-        onSubmit: (values: RaceEventForm) => {
-            console.log(values);
-        },
+        onSubmit: onSubmit
     };
 
     return (

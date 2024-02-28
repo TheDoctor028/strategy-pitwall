@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@apollo/client": "^3.9.5",
     "bootstrap": "^5.3.3",
     "formik": "^2.4.5",
+    "graphql": "^16.8.1",
     "node-strategy-pitwall": "file:../node-starategy-pitwall",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
