@@ -1,6 +1,7 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {IEvent} from "node-strategy-pitwall";
 import {EventCard} from "../components/EventCard.tsx";
+import {useModal} from "../providers/ModalProvider.tsx";
 
 function Home() {
     const cardData: IEvent[] = [
@@ -43,11 +44,24 @@ function Home() {
         },
     ];
 
+    const {showModal} = useModal();
+
+    const openCreateEventModal = () => {
+        showModal({
+            body: "",
+            buttons: [],
+            onClose(event: string): void {
+                console.log(event);
+            },
+            title: "Valami"
+        })
+    }
+
     return (
         <Container className="w-100">
             <h1>Events</h1>
             <Container className="d-flex flex-row justify-content-end">
-                <Button variant="primary">Create Event</Button>
+                <Button variant="primary" onClick={openCreateEventModal}>Create Event</Button>
             </Container>
             <Row className="d-flex flex-row my-2">
                 {cardData.map((card, index) => (
