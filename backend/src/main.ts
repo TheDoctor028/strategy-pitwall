@@ -6,6 +6,9 @@ import { ApolloServer } from '@apollo/server';
 import { buildSchema } from 'type-graphql';
 import { resolvers } from '@generated/type-graphql';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import { expressMiddleware } from '@apollo/server/express4';
+import { json } from 'express';
+import { typeDefs } from 'graphql-scalars';
 
 async function bootstrap() {
   const prisma = new PrismaClient();
@@ -17,19 +20,20 @@ async function bootstrap() {
     validate: false,
   });
 
-  const apolloServer = new ApolloServer({
+  const apolloServer = new ApolloServer<{ prisma: PrismaClient }>({
     schema,
   });
-
-  await startStandaloneServer(apolloServer, {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    context: () => ({ prisma }),
-    listen: { port: 4000 },
-  });
+  await apolloServer.start();
 
   const app = await NestFactory.create(AppModule);
   app.enableCors();
+  app.use(
+    '/graphql',
+    json(),
+    expressMiddleware<{ prisma: PrismaClient }>(apolloServer, {
+      context: async () => ({ prisma }),
+    }),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('NESTJS API')
