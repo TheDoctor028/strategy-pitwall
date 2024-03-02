@@ -5,10 +5,8 @@ import { PrismaClient } from '@prisma/client';
 import { ApolloServer } from '@apollo/server';
 import { buildSchema } from 'type-graphql';
 import { resolvers } from '@generated/type-graphql';
-import { startStandaloneServer } from '@apollo/server/standalone';
 import { expressMiddleware } from '@apollo/server/express4';
 import { json } from 'express';
-import { typeDefs } from 'graphql-scalars';
 
 async function bootstrap() {
   const prisma = new PrismaClient();
@@ -23,10 +21,19 @@ async function bootstrap() {
   const apolloServer = new ApolloServer<{ prisma: PrismaClient }>({
     schema,
   });
-  await apolloServer.start();
 
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+
+  const CorsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  };
+
+  await apolloServer.start();
+
+  app.enableCors(CorsOptions);
+
   app.use(
     '/graphql',
     json(),
