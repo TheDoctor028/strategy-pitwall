@@ -1,0 +1,10 @@
+fragment SelectTeamFragment on Team {
+    id
+    name
+}
+
+query GetSelectableTeams {
+    teams {
+        ...SelectTeamFragment
+    }
+}

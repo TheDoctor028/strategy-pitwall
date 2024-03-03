@@ -1,0 +1,10 @@
+fragment SelectTrackFragment on Track {
+    id
+    name
+}
+
+query GetSelectableTracks {
+    tracks {
+        ...SelectTrackFragment
+    }
+}

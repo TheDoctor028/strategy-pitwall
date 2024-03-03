@@ -2382,6 +2382,20 @@ export type GetEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, series?: string | null, sessionStart: any, raceStartSim: any, duration: number, greenFlagOffset: number, team: { __typename?: 'Team', name: string, car: { __typename?: 'Car', name: string, class: string } }, track: { __typename?: 'Track', name: string, layout: string } }> };
 
+export type SelectTeamFragmentFragment = { __typename?: 'Team', id: string, name: string };
+
+export type GetSelectableTeamsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSelectableTeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', id: string, name: string }> };
+
+export type SelectTrackFragmentFragment = { __typename?: 'Track', id: string, name: string };
+
+export type GetSelectableTracksQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSelectableTracksQuery = { __typename?: 'Query', tracks: Array<{ __typename?: 'Track', id: string, name: string }> };
+
 export const EventCardFragmentDoc = gql`
     fragment EventCard on Event {
   id
@@ -2402,6 +2416,18 @@ export const EventCardFragmentDoc = gql`
     name
     layout
   }
+}
+    `;
+export const SelectTeamFragmentFragmentDoc = gql`
+    fragment SelectTeamFragment on Team {
+  id
+  name
+}
+    `;
+export const SelectTrackFragmentFragmentDoc = gql`
+    fragment SelectTrackFragment on Track {
+  id
+  name
 }
     `;
 export const GetEventsDocument = gql`
@@ -2443,3 +2469,81 @@ export type GetEventsQueryHookResult = ReturnType<typeof useGetEventsQuery>;
 export type GetEventsLazyQueryHookResult = ReturnType<typeof useGetEventsLazyQuery>;
 export type GetEventsSuspenseQueryHookResult = ReturnType<typeof useGetEventsSuspenseQuery>;
 export type GetEventsQueryResult = Apollo.QueryResult<GetEventsQuery, GetEventsQueryVariables>;
+export const GetSelectableTeamsDocument = gql`
+    query GetSelectableTeams {
+  teams {
+    ...SelectTeamFragment
+  }
+}
+    ${SelectTeamFragmentFragmentDoc}`;
+
+/**
+ * __useGetSelectableTeamsQuery__
+ *
+ * To run a query within a React component, call `useGetSelectableTeamsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSelectableTeamsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSelectableTeamsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetSelectableTeamsQuery(baseOptions?: Apollo.QueryHookOptions<GetSelectableTeamsQuery, GetSelectableTeamsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSelectableTeamsQuery, GetSelectableTeamsQueryVariables>(GetSelectableTeamsDocument, options);
+      }
+export function useGetSelectableTeamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSelectableTeamsQuery, GetSelectableTeamsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSelectableTeamsQuery, GetSelectableTeamsQueryVariables>(GetSelectableTeamsDocument, options);
+        }
+export function useGetSelectableTeamsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetSelectableTeamsQuery, GetSelectableTeamsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetSelectableTeamsQuery, GetSelectableTeamsQueryVariables>(GetSelectableTeamsDocument, options);
+        }
+export type GetSelectableTeamsQueryHookResult = ReturnType<typeof useGetSelectableTeamsQuery>;
+export type GetSelectableTeamsLazyQueryHookResult = ReturnType<typeof useGetSelectableTeamsLazyQuery>;
+export type GetSelectableTeamsSuspenseQueryHookResult = ReturnType<typeof useGetSelectableTeamsSuspenseQuery>;
+export type GetSelectableTeamsQueryResult = Apollo.QueryResult<GetSelectableTeamsQuery, GetSelectableTeamsQueryVariables>;
+export const GetSelectableTracksDocument = gql`
+    query GetSelectableTracks {
+  tracks {
+    ...SelectTrackFragment
+  }
+}
+    ${SelectTrackFragmentFragmentDoc}`;
+
+/**
+ * __useGetSelectableTracksQuery__
+ *
+ * To run a query within a React component, call `useGetSelectableTracksQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSelectableTracksQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSelectableTracksQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetSelectableTracksQuery(baseOptions?: Apollo.QueryHookOptions<GetSelectableTracksQuery, GetSelectableTracksQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSelectableTracksQuery, GetSelectableTracksQueryVariables>(GetSelectableTracksDocument, options);
+      }
+export function useGetSelectableTracksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSelectableTracksQuery, GetSelectableTracksQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSelectableTracksQuery, GetSelectableTracksQueryVariables>(GetSelectableTracksDocument, options);
+        }
+export function useGetSelectableTracksSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetSelectableTracksQuery, GetSelectableTracksQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetSelectableTracksQuery, GetSelectableTracksQueryVariables>(GetSelectableTracksDocument, options);
+        }
+export type GetSelectableTracksQueryHookResult = ReturnType<typeof useGetSelectableTracksQuery>;
+export type GetSelectableTracksLazyQueryHookResult = ReturnType<typeof useGetSelectableTracksLazyQuery>;
+export type GetSelectableTracksSuspenseQueryHookResult = ReturnType<typeof useGetSelectableTracksSuspenseQuery>;
+export type GetSelectableTracksQueryResult = Apollo.QueryResult<GetSelectableTracksQuery, GetSelectableTracksQueryVariables>;

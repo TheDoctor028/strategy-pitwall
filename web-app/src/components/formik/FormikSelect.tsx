@@ -2,7 +2,9 @@ import {Form, FormControlProps} from "react-bootstrap";
 import {FormFieldProps} from "../../models/formik.ts";
 import {useField} from "formik";
 
-export type FormSelectFieldProps = {options: Array<{value: string | number, text: string}>} & FormControlProps &
+export type SelectOption = {value: string | number, text: string};
+
+export type FormSelectFieldProps = {options: SelectOption[]} & FormControlProps &
     JSX.IntrinsicElements["select"] & FormFieldProps;
 
 

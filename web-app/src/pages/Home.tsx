@@ -25,7 +25,7 @@ function Home() {
                         return true;
                 }
             },
-            title: "Valami"
+            title: "Create New Event"
         })
     }
 
@@ -38,7 +38,7 @@ function Home() {
             <Row className="d-flex flex-row my-2">
                 {data?.events.map((event, index) => (
                     <Col key={index} sm={12} md={6} lg={4}>
-                        <EventCard event={event} />
+                        <EventCard key={`event-card-${index}`} event={event} />
                     </Col>
                 ))}
             </Row>
