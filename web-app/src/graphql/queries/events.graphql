@@ -1,0 +1,11 @@
+query GetEvents {
+    events {
+        id
+        name
+        series
+        sessionStart
+        raceStartSim
+        duration
+        greenFlagOffset
+    }
+}

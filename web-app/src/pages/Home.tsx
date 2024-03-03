@@ -48,6 +48,8 @@ function Home() {
         },
     ];
 
+    //const { data } = useGetEventsQuery()
+
     const {showModal, closeModal} = useModal();
     const submitFormEnvoy = new Envoy();
 
