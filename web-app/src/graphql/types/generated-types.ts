@@ -25,6 +25,24 @@ export type AffectedRowsOutput = {
   count: Scalars['Int']['output'];
 };
 
+export type AggregateCar = {
+  __typename?: 'AggregateCar';
+  _avg?: Maybe<CarAvgAggregate>;
+  _count?: Maybe<CarCountAggregate>;
+  _max?: Maybe<CarMaxAggregate>;
+  _min?: Maybe<CarMinAggregate>;
+  _sum?: Maybe<CarSumAggregate>;
+};
+
+export type AggregateDriver = {
+  __typename?: 'AggregateDriver';
+  _avg?: Maybe<DriverAvgAggregate>;
+  _count?: Maybe<DriverCountAggregate>;
+  _max?: Maybe<DriverMaxAggregate>;
+  _min?: Maybe<DriverMinAggregate>;
+  _sum?: Maybe<DriverSumAggregate>;
+};
+
 export type AggregateEvent = {
   __typename?: 'AggregateEvent';
   _avg?: Maybe<EventAvgAggregate>;
@@ -32,6 +50,260 @@ export type AggregateEvent = {
   _max?: Maybe<EventMaxAggregate>;
   _min?: Maybe<EventMinAggregate>;
   _sum?: Maybe<EventSumAggregate>;
+};
+
+export type AggregateTeam = {
+  __typename?: 'AggregateTeam';
+  _count?: Maybe<TeamCountAggregate>;
+  _max?: Maybe<TeamMaxAggregate>;
+  _min?: Maybe<TeamMinAggregate>;
+};
+
+export type AggregateTrack = {
+  __typename?: 'AggregateTrack';
+  _avg?: Maybe<TrackAvgAggregate>;
+  _count?: Maybe<TrackCountAggregate>;
+  _max?: Maybe<TrackMaxAggregate>;
+  _min?: Maybe<TrackMinAggregate>;
+  _sum?: Maybe<TrackSumAggregate>;
+};
+
+export type Car = {
+  __typename?: 'Car';
+  _count?: Maybe<CarCount>;
+  class: Scalars['String']['output'];
+  fuelTankSize: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  teams: Array<Team>;
+};
+
+
+export type CarTeamsArgs = {
+  cursor?: InputMaybe<TeamWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TeamScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TeamOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+export type CarAvgAggregate = {
+  __typename?: 'CarAvgAggregate';
+  fuelTankSize?: Maybe<Scalars['Float']['output']>;
+};
+
+export type CarAvgOrderByAggregateInput = {
+  fuelTankSize?: InputMaybe<SortOrder>;
+};
+
+export type CarCount = {
+  __typename?: 'CarCount';
+  teams: Scalars['Int']['output'];
+};
+
+
+export type CarCountTeamsArgs = {
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+export type CarCountAggregate = {
+  __typename?: 'CarCountAggregate';
+  _all: Scalars['Int']['output'];
+  class: Scalars['Int']['output'];
+  fuelTankSize: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+};
+
+export type CarCountOrderByAggregateInput = {
+  class?: InputMaybe<SortOrder>;
+  fuelTankSize?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type CarCreateInput = {
+  class: Scalars['String']['input'];
+  fuelTankSize: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  teams?: InputMaybe<TeamCreateNestedManyWithoutCarInput>;
+};
+
+export type CarCreateNestedOneWithoutTeamsInput = {
+  connect?: InputMaybe<CarWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CarCreateOrConnectWithoutTeamsInput>;
+  create?: InputMaybe<CarCreateWithoutTeamsInput>;
+};
+
+export type CarCreateOrConnectWithoutTeamsInput = {
+  create: CarCreateWithoutTeamsInput;
+  where: CarWhereUniqueInput;
+};
+
+export type CarCreateWithoutTeamsInput = {
+  class: Scalars['String']['input'];
+  fuelTankSize: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type CarGroupBy = {
+  __typename?: 'CarGroupBy';
+  _avg?: Maybe<CarAvgAggregate>;
+  _count?: Maybe<CarCountAggregate>;
+  _max?: Maybe<CarMaxAggregate>;
+  _min?: Maybe<CarMinAggregate>;
+  _sum?: Maybe<CarSumAggregate>;
+  class: Scalars['String']['output'];
+  fuelTankSize: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type CarMaxAggregate = {
+  __typename?: 'CarMaxAggregate';
+  class?: Maybe<Scalars['String']['output']>;
+  fuelTankSize?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type CarMaxOrderByAggregateInput = {
+  class?: InputMaybe<SortOrder>;
+  fuelTankSize?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type CarMinAggregate = {
+  __typename?: 'CarMinAggregate';
+  class?: Maybe<Scalars['String']['output']>;
+  fuelTankSize?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type CarMinOrderByAggregateInput = {
+  class?: InputMaybe<SortOrder>;
+  fuelTankSize?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type CarOrderByWithAggregationInput = {
+  _avg?: InputMaybe<CarAvgOrderByAggregateInput>;
+  _count?: InputMaybe<CarCountOrderByAggregateInput>;
+  _max?: InputMaybe<CarMaxOrderByAggregateInput>;
+  _min?: InputMaybe<CarMinOrderByAggregateInput>;
+  _sum?: InputMaybe<CarSumOrderByAggregateInput>;
+  class?: InputMaybe<SortOrder>;
+  fuelTankSize?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type CarOrderByWithRelationInput = {
+  class?: InputMaybe<SortOrder>;
+  fuelTankSize?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  teams?: InputMaybe<TeamOrderByRelationAggregateInput>;
+};
+
+export type CarRelationFilter = {
+  is?: InputMaybe<CarWhereInput>;
+  isNot?: InputMaybe<CarWhereInput>;
+};
+
+export enum CarScalarFieldEnum {
+  Class = 'class',
+  FuelTankSize = 'fuelTankSize',
+  Id = 'id',
+  Name = 'name'
+}
+
+export type CarScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<CarScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<CarScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<CarScalarWhereWithAggregatesInput>>;
+  class?: InputMaybe<StringWithAggregatesFilter>;
+  fuelTankSize?: InputMaybe<IntWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type CarSumAggregate = {
+  __typename?: 'CarSumAggregate';
+  fuelTankSize?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CarSumOrderByAggregateInput = {
+  fuelTankSize?: InputMaybe<SortOrder>;
+};
+
+export type CarUpdateInput = {
+  class?: InputMaybe<StringFieldUpdateOperationsInput>;
+  fuelTankSize?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  teams?: InputMaybe<TeamUpdateManyWithoutCarNestedInput>;
+};
+
+export type CarUpdateManyMutationInput = {
+  class?: InputMaybe<StringFieldUpdateOperationsInput>;
+  fuelTankSize?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type CarUpdateOneRequiredWithoutTeamsNestedInput = {
+  connect?: InputMaybe<CarWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CarCreateOrConnectWithoutTeamsInput>;
+  create?: InputMaybe<CarCreateWithoutTeamsInput>;
+  update?: InputMaybe<CarUpdateToOneWithWhereWithoutTeamsInput>;
+  upsert?: InputMaybe<CarUpsertWithoutTeamsInput>;
+};
+
+export type CarUpdateToOneWithWhereWithoutTeamsInput = {
+  data: CarUpdateWithoutTeamsInput;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+export type CarUpdateWithoutTeamsInput = {
+  class?: InputMaybe<StringFieldUpdateOperationsInput>;
+  fuelTankSize?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type CarUpsertWithoutTeamsInput = {
+  create: CarCreateWithoutTeamsInput;
+  update: CarUpdateWithoutTeamsInput;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+export type CarWhereInput = {
+  AND?: InputMaybe<Array<CarWhereInput>>;
+  NOT?: InputMaybe<Array<CarWhereInput>>;
+  OR?: InputMaybe<Array<CarWhereInput>>;
+  class?: InputMaybe<StringFilter>;
+  fuelTankSize?: InputMaybe<IntFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  teams?: InputMaybe<TeamListRelationFilter>;
+};
+
+export type CarWhereUniqueInput = {
+  AND?: InputMaybe<Array<CarWhereInput>>;
+  NOT?: InputMaybe<Array<CarWhereInput>>;
+  OR?: InputMaybe<Array<CarWhereInput>>;
+  class?: InputMaybe<StringFilter>;
+  fuelTankSize?: InputMaybe<IntFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<StringFilter>;
+  teams?: InputMaybe<TeamListRelationFilter>;
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -63,6 +335,267 @@ export type DateTimeWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTimeISO']['input']>>;
 };
 
+export type Driver = {
+  __typename?: 'Driver';
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  rating: Scalars['Int']['output'];
+  team: Team;
+  teamId: Scalars['String']['output'];
+  utcOffset: Scalars['Int']['output'];
+};
+
+export type DriverAvgAggregate = {
+  __typename?: 'DriverAvgAggregate';
+  rating?: Maybe<Scalars['Float']['output']>;
+  utcOffset?: Maybe<Scalars['Float']['output']>;
+};
+
+export type DriverAvgOrderByAggregateInput = {
+  rating?: InputMaybe<SortOrder>;
+  utcOffset?: InputMaybe<SortOrder>;
+};
+
+export type DriverCountAggregate = {
+  __typename?: 'DriverCountAggregate';
+  _all: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  rating: Scalars['Int']['output'];
+  teamId: Scalars['Int']['output'];
+  utcOffset: Scalars['Int']['output'];
+};
+
+export type DriverCountOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  utcOffset?: InputMaybe<SortOrder>;
+};
+
+export type DriverCreateInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+  team: TeamCreateNestedOneWithoutDriversInput;
+  utcOffset: Scalars['Int']['input'];
+};
+
+export type DriverCreateNestedManyWithoutTeamInput = {
+  connect?: InputMaybe<Array<DriverWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<DriverCreateOrConnectWithoutTeamInput>>;
+  create?: InputMaybe<Array<DriverCreateWithoutTeamInput>>;
+};
+
+export type DriverCreateOrConnectWithoutTeamInput = {
+  create: DriverCreateWithoutTeamInput;
+  where: DriverWhereUniqueInput;
+};
+
+export type DriverCreateWithoutTeamInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+  utcOffset: Scalars['Int']['input'];
+};
+
+export type DriverGroupBy = {
+  __typename?: 'DriverGroupBy';
+  _avg?: Maybe<DriverAvgAggregate>;
+  _count?: Maybe<DriverCountAggregate>;
+  _max?: Maybe<DriverMaxAggregate>;
+  _min?: Maybe<DriverMinAggregate>;
+  _sum?: Maybe<DriverSumAggregate>;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  rating: Scalars['Int']['output'];
+  teamId: Scalars['String']['output'];
+  utcOffset: Scalars['Int']['output'];
+};
+
+export type DriverListRelationFilter = {
+  every?: InputMaybe<DriverWhereInput>;
+  none?: InputMaybe<DriverWhereInput>;
+  some?: InputMaybe<DriverWhereInput>;
+};
+
+export type DriverMaxAggregate = {
+  __typename?: 'DriverMaxAggregate';
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  rating?: Maybe<Scalars['Int']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
+  utcOffset?: Maybe<Scalars['Int']['output']>;
+};
+
+export type DriverMaxOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  utcOffset?: InputMaybe<SortOrder>;
+};
+
+export type DriverMinAggregate = {
+  __typename?: 'DriverMinAggregate';
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  rating?: Maybe<Scalars['Int']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
+  utcOffset?: Maybe<Scalars['Int']['output']>;
+};
+
+export type DriverMinOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  utcOffset?: InputMaybe<SortOrder>;
+};
+
+export type DriverOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type DriverOrderByWithAggregationInput = {
+  _avg?: InputMaybe<DriverAvgOrderByAggregateInput>;
+  _count?: InputMaybe<DriverCountOrderByAggregateInput>;
+  _max?: InputMaybe<DriverMaxOrderByAggregateInput>;
+  _min?: InputMaybe<DriverMinOrderByAggregateInput>;
+  _sum?: InputMaybe<DriverSumOrderByAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  utcOffset?: InputMaybe<SortOrder>;
+};
+
+export type DriverOrderByWithRelationInput = {
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  team?: InputMaybe<TeamOrderByWithRelationInput>;
+  teamId?: InputMaybe<SortOrder>;
+  utcOffset?: InputMaybe<SortOrder>;
+};
+
+export enum DriverScalarFieldEnum {
+  Id = 'id',
+  Name = 'name',
+  Rating = 'rating',
+  TeamId = 'teamId',
+  UtcOffset = 'utcOffset'
+}
+
+export type DriverScalarWhereInput = {
+  AND?: InputMaybe<Array<DriverScalarWhereInput>>;
+  NOT?: InputMaybe<Array<DriverScalarWhereInput>>;
+  OR?: InputMaybe<Array<DriverScalarWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  rating?: InputMaybe<IntFilter>;
+  teamId?: InputMaybe<StringFilter>;
+  utcOffset?: InputMaybe<IntFilter>;
+};
+
+export type DriverScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<DriverScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<DriverScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<DriverScalarWhereWithAggregatesInput>>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  rating?: InputMaybe<IntWithAggregatesFilter>;
+  teamId?: InputMaybe<StringWithAggregatesFilter>;
+  utcOffset?: InputMaybe<IntWithAggregatesFilter>;
+};
+
+export type DriverSumAggregate = {
+  __typename?: 'DriverSumAggregate';
+  rating?: Maybe<Scalars['Int']['output']>;
+  utcOffset?: Maybe<Scalars['Int']['output']>;
+};
+
+export type DriverSumOrderByAggregateInput = {
+  rating?: InputMaybe<SortOrder>;
+  utcOffset?: InputMaybe<SortOrder>;
+};
+
+export type DriverUpdateInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  team?: InputMaybe<TeamUpdateOneRequiredWithoutDriversNestedInput>;
+  utcOffset?: InputMaybe<IntFieldUpdateOperationsInput>;
+};
+
+export type DriverUpdateManyMutationInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  utcOffset?: InputMaybe<IntFieldUpdateOperationsInput>;
+};
+
+export type DriverUpdateManyWithWhereWithoutTeamInput = {
+  data: DriverUpdateManyMutationInput;
+  where: DriverScalarWhereInput;
+};
+
+export type DriverUpdateManyWithoutTeamNestedInput = {
+  connect?: InputMaybe<Array<DriverWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<DriverCreateOrConnectWithoutTeamInput>>;
+  create?: InputMaybe<Array<DriverCreateWithoutTeamInput>>;
+  delete?: InputMaybe<Array<DriverWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<DriverScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<DriverWhereUniqueInput>>;
+  set?: InputMaybe<Array<DriverWhereUniqueInput>>;
+  update?: InputMaybe<Array<DriverUpdateWithWhereUniqueWithoutTeamInput>>;
+  updateMany?: InputMaybe<Array<DriverUpdateManyWithWhereWithoutTeamInput>>;
+  upsert?: InputMaybe<Array<DriverUpsertWithWhereUniqueWithoutTeamInput>>;
+};
+
+export type DriverUpdateWithWhereUniqueWithoutTeamInput = {
+  data: DriverUpdateWithoutTeamInput;
+  where: DriverWhereUniqueInput;
+};
+
+export type DriverUpdateWithoutTeamInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  utcOffset?: InputMaybe<IntFieldUpdateOperationsInput>;
+};
+
+export type DriverUpsertWithWhereUniqueWithoutTeamInput = {
+  create: DriverCreateWithoutTeamInput;
+  update: DriverUpdateWithoutTeamInput;
+  where: DriverWhereUniqueInput;
+};
+
+export type DriverWhereInput = {
+  AND?: InputMaybe<Array<DriverWhereInput>>;
+  NOT?: InputMaybe<Array<DriverWhereInput>>;
+  OR?: InputMaybe<Array<DriverWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  rating?: InputMaybe<IntFilter>;
+  team?: InputMaybe<TeamRelationFilter>;
+  teamId?: InputMaybe<StringFilter>;
+  utcOffset?: InputMaybe<IntFilter>;
+};
+
+export type DriverWhereUniqueInput = {
+  AND?: InputMaybe<Array<DriverWhereInput>>;
+  NOT?: InputMaybe<Array<DriverWhereInput>>;
+  OR?: InputMaybe<Array<DriverWhereInput>>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<StringFilter>;
+  rating?: InputMaybe<IntFilter>;
+  team?: InputMaybe<TeamRelationFilter>;
+  teamId?: InputMaybe<StringFilter>;
+  utcOffset?: InputMaybe<IntFilter>;
+};
+
 export type Event = {
   __typename?: 'Event';
   duration: Scalars['Int']['output'];
@@ -72,6 +605,10 @@ export type Event = {
   raceStartSim: Scalars['DateTimeISO']['output'];
   series?: Maybe<Scalars['String']['output']>;
   sessionStart: Scalars['DateTimeISO']['output'];
+  team: Team;
+  teamId: Scalars['String']['output'];
+  track: Track;
+  trackId: Scalars['String']['output'];
 };
 
 export type EventAvgAggregate = {
@@ -95,6 +632,8 @@ export type EventCountAggregate = {
   raceStartSim: Scalars['Int']['output'];
   series: Scalars['Int']['output'];
   sessionStart: Scalars['Int']['output'];
+  teamId: Scalars['Int']['output'];
+  trackId: Scalars['Int']['output'];
 };
 
 export type EventCountOrderByAggregateInput = {
@@ -105,6 +644,8 @@ export type EventCountOrderByAggregateInput = {
   raceStartSim?: InputMaybe<SortOrder>;
   series?: InputMaybe<SortOrder>;
   sessionStart?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  trackId?: InputMaybe<SortOrder>;
 };
 
 export type EventCreateInput = {
@@ -115,6 +656,52 @@ export type EventCreateInput = {
   raceStartSim: Scalars['DateTimeISO']['input'];
   series?: InputMaybe<Scalars['String']['input']>;
   sessionStart: Scalars['DateTimeISO']['input'];
+  team: TeamCreateNestedOneWithoutEventsInput;
+  track: TrackCreateNestedOneWithoutEventsInput;
+};
+
+export type EventCreateNestedManyWithoutTeamInput = {
+  connect?: InputMaybe<Array<EventWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<EventCreateOrConnectWithoutTeamInput>>;
+  create?: InputMaybe<Array<EventCreateWithoutTeamInput>>;
+};
+
+export type EventCreateNestedManyWithoutTrackInput = {
+  connect?: InputMaybe<Array<EventWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<EventCreateOrConnectWithoutTrackInput>>;
+  create?: InputMaybe<Array<EventCreateWithoutTrackInput>>;
+};
+
+export type EventCreateOrConnectWithoutTeamInput = {
+  create: EventCreateWithoutTeamInput;
+  where: EventWhereUniqueInput;
+};
+
+export type EventCreateOrConnectWithoutTrackInput = {
+  create: EventCreateWithoutTrackInput;
+  where: EventWhereUniqueInput;
+};
+
+export type EventCreateWithoutTeamInput = {
+  duration: Scalars['Int']['input'];
+  greenFlagOffset: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  raceStartSim: Scalars['DateTimeISO']['input'];
+  series?: InputMaybe<Scalars['String']['input']>;
+  sessionStart: Scalars['DateTimeISO']['input'];
+  track: TrackCreateNestedOneWithoutEventsInput;
+};
+
+export type EventCreateWithoutTrackInput = {
+  duration: Scalars['Int']['input'];
+  greenFlagOffset: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  raceStartSim: Scalars['DateTimeISO']['input'];
+  series?: InputMaybe<Scalars['String']['input']>;
+  sessionStart: Scalars['DateTimeISO']['input'];
+  team: TeamCreateNestedOneWithoutEventsInput;
 };
 
 export type EventGroupBy = {
@@ -131,6 +718,14 @@ export type EventGroupBy = {
   raceStartSim: Scalars['DateTimeISO']['output'];
   series?: Maybe<Scalars['String']['output']>;
   sessionStart: Scalars['DateTimeISO']['output'];
+  teamId: Scalars['String']['output'];
+  trackId: Scalars['String']['output'];
+};
+
+export type EventListRelationFilter = {
+  every?: InputMaybe<EventWhereInput>;
+  none?: InputMaybe<EventWhereInput>;
+  some?: InputMaybe<EventWhereInput>;
 };
 
 export type EventMaxAggregate = {
@@ -142,6 +737,8 @@ export type EventMaxAggregate = {
   raceStartSim?: Maybe<Scalars['DateTimeISO']['output']>;
   series?: Maybe<Scalars['String']['output']>;
   sessionStart?: Maybe<Scalars['DateTimeISO']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
+  trackId?: Maybe<Scalars['String']['output']>;
 };
 
 export type EventMaxOrderByAggregateInput = {
@@ -152,6 +749,8 @@ export type EventMaxOrderByAggregateInput = {
   raceStartSim?: InputMaybe<SortOrder>;
   series?: InputMaybe<SortOrder>;
   sessionStart?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  trackId?: InputMaybe<SortOrder>;
 };
 
 export type EventMinAggregate = {
@@ -163,6 +762,8 @@ export type EventMinAggregate = {
   raceStartSim?: Maybe<Scalars['DateTimeISO']['output']>;
   series?: Maybe<Scalars['String']['output']>;
   sessionStart?: Maybe<Scalars['DateTimeISO']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
+  trackId?: Maybe<Scalars['String']['output']>;
 };
 
 export type EventMinOrderByAggregateInput = {
@@ -173,6 +774,12 @@ export type EventMinOrderByAggregateInput = {
   raceStartSim?: InputMaybe<SortOrder>;
   series?: InputMaybe<SortOrder>;
   sessionStart?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  trackId?: InputMaybe<SortOrder>;
+};
+
+export type EventOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
 };
 
 export type EventOrderByWithAggregationInput = {
@@ -188,6 +795,8 @@ export type EventOrderByWithAggregationInput = {
   raceStartSim?: InputMaybe<SortOrder>;
   series?: InputMaybe<SortOrderInput>;
   sessionStart?: InputMaybe<SortOrder>;
+  teamId?: InputMaybe<SortOrder>;
+  trackId?: InputMaybe<SortOrder>;
 };
 
 export type EventOrderByWithRelationInput = {
@@ -198,6 +807,10 @@ export type EventOrderByWithRelationInput = {
   raceStartSim?: InputMaybe<SortOrder>;
   series?: InputMaybe<SortOrderInput>;
   sessionStart?: InputMaybe<SortOrder>;
+  team?: InputMaybe<TeamOrderByWithRelationInput>;
+  teamId?: InputMaybe<SortOrder>;
+  track?: InputMaybe<TrackOrderByWithRelationInput>;
+  trackId?: InputMaybe<SortOrder>;
 };
 
 export enum EventScalarFieldEnum {
@@ -207,8 +820,25 @@ export enum EventScalarFieldEnum {
   Name = 'name',
   RaceStartSim = 'raceStartSim',
   Series = 'series',
-  SessionStart = 'sessionStart'
+  SessionStart = 'sessionStart',
+  TeamId = 'teamId',
+  TrackId = 'trackId'
 }
+
+export type EventScalarWhereInput = {
+  AND?: InputMaybe<Array<EventScalarWhereInput>>;
+  NOT?: InputMaybe<Array<EventScalarWhereInput>>;
+  OR?: InputMaybe<Array<EventScalarWhereInput>>;
+  duration?: InputMaybe<IntFilter>;
+  greenFlagOffset?: InputMaybe<IntFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  raceStartSim?: InputMaybe<DateTimeFilter>;
+  series?: InputMaybe<StringNullableFilter>;
+  sessionStart?: InputMaybe<DateTimeFilter>;
+  teamId?: InputMaybe<StringFilter>;
+  trackId?: InputMaybe<StringFilter>;
+};
 
 export type EventScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<EventScalarWhereWithAggregatesInput>>;
@@ -221,6 +851,8 @@ export type EventScalarWhereWithAggregatesInput = {
   raceStartSim?: InputMaybe<DateTimeWithAggregatesFilter>;
   series?: InputMaybe<StringNullableWithAggregatesFilter>;
   sessionStart?: InputMaybe<DateTimeWithAggregatesFilter>;
+  teamId?: InputMaybe<StringWithAggregatesFilter>;
+  trackId?: InputMaybe<StringWithAggregatesFilter>;
 };
 
 export type EventSumAggregate = {
@@ -242,6 +874,8 @@ export type EventUpdateInput = {
   raceStartSim?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   series?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   sessionStart?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  team?: InputMaybe<TeamUpdateOneRequiredWithoutEventsNestedInput>;
+  track?: InputMaybe<TrackUpdateOneRequiredWithoutEventsNestedInput>;
 };
 
 export type EventUpdateManyMutationInput = {
@@ -252,6 +886,86 @@ export type EventUpdateManyMutationInput = {
   raceStartSim?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   series?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   sessionStart?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type EventUpdateManyWithWhereWithoutTeamInput = {
+  data: EventUpdateManyMutationInput;
+  where: EventScalarWhereInput;
+};
+
+export type EventUpdateManyWithWhereWithoutTrackInput = {
+  data: EventUpdateManyMutationInput;
+  where: EventScalarWhereInput;
+};
+
+export type EventUpdateManyWithoutTeamNestedInput = {
+  connect?: InputMaybe<Array<EventWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<EventCreateOrConnectWithoutTeamInput>>;
+  create?: InputMaybe<Array<EventCreateWithoutTeamInput>>;
+  delete?: InputMaybe<Array<EventWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<EventScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<EventWhereUniqueInput>>;
+  set?: InputMaybe<Array<EventWhereUniqueInput>>;
+  update?: InputMaybe<Array<EventUpdateWithWhereUniqueWithoutTeamInput>>;
+  updateMany?: InputMaybe<Array<EventUpdateManyWithWhereWithoutTeamInput>>;
+  upsert?: InputMaybe<Array<EventUpsertWithWhereUniqueWithoutTeamInput>>;
+};
+
+export type EventUpdateManyWithoutTrackNestedInput = {
+  connect?: InputMaybe<Array<EventWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<EventCreateOrConnectWithoutTrackInput>>;
+  create?: InputMaybe<Array<EventCreateWithoutTrackInput>>;
+  delete?: InputMaybe<Array<EventWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<EventScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<EventWhereUniqueInput>>;
+  set?: InputMaybe<Array<EventWhereUniqueInput>>;
+  update?: InputMaybe<Array<EventUpdateWithWhereUniqueWithoutTrackInput>>;
+  updateMany?: InputMaybe<Array<EventUpdateManyWithWhereWithoutTrackInput>>;
+  upsert?: InputMaybe<Array<EventUpsertWithWhereUniqueWithoutTrackInput>>;
+};
+
+export type EventUpdateWithWhereUniqueWithoutTeamInput = {
+  data: EventUpdateWithoutTeamInput;
+  where: EventWhereUniqueInput;
+};
+
+export type EventUpdateWithWhereUniqueWithoutTrackInput = {
+  data: EventUpdateWithoutTrackInput;
+  where: EventWhereUniqueInput;
+};
+
+export type EventUpdateWithoutTeamInput = {
+  duration?: InputMaybe<IntFieldUpdateOperationsInput>;
+  greenFlagOffset?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  raceStartSim?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  series?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  sessionStart?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  track?: InputMaybe<TrackUpdateOneRequiredWithoutEventsNestedInput>;
+};
+
+export type EventUpdateWithoutTrackInput = {
+  duration?: InputMaybe<IntFieldUpdateOperationsInput>;
+  greenFlagOffset?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  raceStartSim?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  series?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  sessionStart?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  team?: InputMaybe<TeamUpdateOneRequiredWithoutEventsNestedInput>;
+};
+
+export type EventUpsertWithWhereUniqueWithoutTeamInput = {
+  create: EventCreateWithoutTeamInput;
+  update: EventUpdateWithoutTeamInput;
+  where: EventWhereUniqueInput;
+};
+
+export type EventUpsertWithWhereUniqueWithoutTrackInput = {
+  create: EventCreateWithoutTrackInput;
+  update: EventUpdateWithoutTrackInput;
+  where: EventWhereUniqueInput;
 };
 
 export type EventWhereInput = {
@@ -265,6 +979,10 @@ export type EventWhereInput = {
   raceStartSim?: InputMaybe<DateTimeFilter>;
   series?: InputMaybe<StringNullableFilter>;
   sessionStart?: InputMaybe<DateTimeFilter>;
+  team?: InputMaybe<TeamRelationFilter>;
+  teamId?: InputMaybe<StringFilter>;
+  track?: InputMaybe<TrackRelationFilter>;
+  trackId?: InputMaybe<StringFilter>;
 };
 
 export type EventWhereUniqueInput = {
@@ -278,6 +996,10 @@ export type EventWhereUniqueInput = {
   raceStartSim?: InputMaybe<DateTimeFilter>;
   series?: InputMaybe<StringNullableFilter>;
   sessionStart?: InputMaybe<DateTimeFilter>;
+  team?: InputMaybe<TeamRelationFilter>;
+  teamId?: InputMaybe<StringFilter>;
+  track?: InputMaybe<TrackRelationFilter>;
+  trackId?: InputMaybe<StringFilter>;
 };
 
 export type IntFieldUpdateOperationsInput = {
@@ -317,12 +1039,46 @@ export type IntWithAggregatesFilter = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createOneCar: Car;
+  createOneDriver: Driver;
   createOneEvent: Event;
+  createOneTeam: Team;
+  createOneTrack: Track;
+  deleteManyCar: AffectedRowsOutput;
+  deleteManyDriver: AffectedRowsOutput;
   deleteManyEvent: AffectedRowsOutput;
+  deleteManyTeam: AffectedRowsOutput;
+  deleteManyTrack: AffectedRowsOutput;
+  deleteOneCar?: Maybe<Car>;
+  deleteOneDriver?: Maybe<Driver>;
   deleteOneEvent?: Maybe<Event>;
+  deleteOneTeam?: Maybe<Team>;
+  deleteOneTrack?: Maybe<Track>;
+  updateManyCar: AffectedRowsOutput;
+  updateManyDriver: AffectedRowsOutput;
   updateManyEvent: AffectedRowsOutput;
+  updateManyTeam: AffectedRowsOutput;
+  updateManyTrack: AffectedRowsOutput;
+  updateOneCar?: Maybe<Car>;
+  updateOneDriver?: Maybe<Driver>;
   updateOneEvent?: Maybe<Event>;
+  updateOneTeam?: Maybe<Team>;
+  updateOneTrack?: Maybe<Track>;
+  upsertOneCar: Car;
+  upsertOneDriver: Driver;
   upsertOneEvent: Event;
+  upsertOneTeam: Team;
+  upsertOneTrack: Track;
+};
+
+
+export type MutationCreateOneCarArgs = {
+  data: CarCreateInput;
+};
+
+
+export type MutationCreateOneDriverArgs = {
+  data: DriverCreateInput;
 };
 
 
@@ -331,13 +1087,75 @@ export type MutationCreateOneEventArgs = {
 };
 
 
+export type MutationCreateOneTeamArgs = {
+  data: TeamCreateInput;
+};
+
+
+export type MutationCreateOneTrackArgs = {
+  data: TrackCreateInput;
+};
+
+
+export type MutationDeleteManyCarArgs = {
+  where?: InputMaybe<CarWhereInput>;
+};
+
+
+export type MutationDeleteManyDriverArgs = {
+  where?: InputMaybe<DriverWhereInput>;
+};
+
+
 export type MutationDeleteManyEventArgs = {
   where?: InputMaybe<EventWhereInput>;
 };
 
 
+export type MutationDeleteManyTeamArgs = {
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+
+export type MutationDeleteManyTrackArgs = {
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+
+export type MutationDeleteOneCarArgs = {
+  where: CarWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneDriverArgs = {
+  where: DriverWhereUniqueInput;
+};
+
+
 export type MutationDeleteOneEventArgs = {
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneTeamArgs = {
+  where: TeamWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneTrackArgs = {
+  where: TrackWhereUniqueInput;
+};
+
+
+export type MutationUpdateManyCarArgs = {
+  data: CarUpdateManyMutationInput;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+
+export type MutationUpdateManyDriverArgs = {
+  data: DriverUpdateManyMutationInput;
+  where?: InputMaybe<DriverWhereInput>;
 };
 
 
@@ -347,9 +1165,59 @@ export type MutationUpdateManyEventArgs = {
 };
 
 
+export type MutationUpdateManyTeamArgs = {
+  data: TeamUpdateManyMutationInput;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+
+export type MutationUpdateManyTrackArgs = {
+  data: TrackUpdateManyMutationInput;
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+
+export type MutationUpdateOneCarArgs = {
+  data: CarUpdateInput;
+  where: CarWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneDriverArgs = {
+  data: DriverUpdateInput;
+  where: DriverWhereUniqueInput;
+};
+
+
 export type MutationUpdateOneEventArgs = {
   data: EventUpdateInput;
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneTeamArgs = {
+  data: TeamUpdateInput;
+  where: TeamWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneTrackArgs = {
+  data: TrackUpdateInput;
+  where: TrackWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneCarArgs = {
+  create: CarCreateInput;
+  update: CarUpdateInput;
+  where: CarWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneDriverArgs = {
+  create: DriverCreateInput;
+  update: DriverUpdateInput;
+  where: DriverWhereUniqueInput;
 };
 
 
@@ -357,6 +1225,20 @@ export type MutationUpsertOneEventArgs = {
   create: EventCreateInput;
   update: EventUpdateInput;
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneTeamArgs = {
+  create: TeamCreateInput;
+  update: TeamUpdateInput;
+  where: TeamWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneTrackArgs = {
+  create: TrackCreateInput;
+  update: TrackUpdateInput;
+  where: TrackWhereUniqueInput;
 };
 
 export type NestedDateTimeFilter = {
@@ -506,13 +1388,59 @@ export enum NullsOrder {
 
 export type Query = {
   __typename?: 'Query';
+  aggregateCar: AggregateCar;
+  aggregateDriver: AggregateDriver;
   aggregateEvent: AggregateEvent;
+  aggregateTeam: AggregateTeam;
+  aggregateTrack: AggregateTrack;
+  car?: Maybe<Car>;
+  cars: Array<Car>;
+  driver?: Maybe<Driver>;
+  drivers: Array<Driver>;
   event?: Maybe<Event>;
   events: Array<Event>;
+  findFirstCar?: Maybe<Car>;
+  findFirstCarOrThrow?: Maybe<Car>;
+  findFirstDriver?: Maybe<Driver>;
+  findFirstDriverOrThrow?: Maybe<Driver>;
   findFirstEvent?: Maybe<Event>;
   findFirstEventOrThrow?: Maybe<Event>;
+  findFirstTeam?: Maybe<Team>;
+  findFirstTeamOrThrow?: Maybe<Team>;
+  findFirstTrack?: Maybe<Track>;
+  findFirstTrackOrThrow?: Maybe<Track>;
+  getCar?: Maybe<Car>;
+  getDriver?: Maybe<Driver>;
   getEvent?: Maybe<Event>;
+  getTeam?: Maybe<Team>;
+  getTrack?: Maybe<Track>;
+  groupByCar: Array<CarGroupBy>;
+  groupByDriver: Array<DriverGroupBy>;
   groupByEvent: Array<EventGroupBy>;
+  groupByTeam: Array<TeamGroupBy>;
+  groupByTrack: Array<TrackGroupBy>;
+  team?: Maybe<Team>;
+  teams: Array<Team>;
+  track?: Maybe<Track>;
+  tracks: Array<Track>;
+};
+
+
+export type QueryAggregateCarArgs = {
+  cursor?: InputMaybe<CarWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<CarOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+
+export type QueryAggregateDriverArgs = {
+  cursor?: InputMaybe<DriverWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<DriverOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DriverWhereInput>;
 };
 
 
@@ -522,6 +1450,54 @@ export type QueryAggregateEventArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type QueryAggregateTeamArgs = {
+  cursor?: InputMaybe<TeamWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<TeamOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+
+export type QueryAggregateTrackArgs = {
+  cursor?: InputMaybe<TrackWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<TrackOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+
+export type QueryCarArgs = {
+  where: CarWhereUniqueInput;
+};
+
+
+export type QueryCarsArgs = {
+  cursor?: InputMaybe<CarWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CarScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CarOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+
+export type QueryDriverArgs = {
+  where: DriverWhereUniqueInput;
+};
+
+
+export type QueryDriversArgs = {
+  cursor?: InputMaybe<DriverWhereUniqueInput>;
+  distinct?: InputMaybe<Array<DriverScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<DriverOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DriverWhereInput>;
 };
 
 
@@ -537,6 +1513,46 @@ export type QueryEventsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type QueryFindFirstCarArgs = {
+  cursor?: InputMaybe<CarWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CarScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CarOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+
+export type QueryFindFirstCarOrThrowArgs = {
+  cursor?: InputMaybe<CarWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CarScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CarOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+
+export type QueryFindFirstDriverArgs = {
+  cursor?: InputMaybe<DriverWhereUniqueInput>;
+  distinct?: InputMaybe<Array<DriverScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<DriverOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DriverWhereInput>;
+};
+
+
+export type QueryFindFirstDriverOrThrowArgs = {
+  cursor?: InputMaybe<DriverWhereUniqueInput>;
+  distinct?: InputMaybe<Array<DriverScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<DriverOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DriverWhereInput>;
 };
 
 
@@ -560,8 +1576,88 @@ export type QueryFindFirstEventOrThrowArgs = {
 };
 
 
+export type QueryFindFirstTeamArgs = {
+  cursor?: InputMaybe<TeamWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TeamScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TeamOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+
+export type QueryFindFirstTeamOrThrowArgs = {
+  cursor?: InputMaybe<TeamWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TeamScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TeamOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+
+export type QueryFindFirstTrackArgs = {
+  cursor?: InputMaybe<TrackWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TrackScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TrackOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+
+export type QueryFindFirstTrackOrThrowArgs = {
+  cursor?: InputMaybe<TrackWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TrackScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TrackOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+
+export type QueryGetCarArgs = {
+  where: CarWhereUniqueInput;
+};
+
+
+export type QueryGetDriverArgs = {
+  where: DriverWhereUniqueInput;
+};
+
+
 export type QueryGetEventArgs = {
   where: EventWhereUniqueInput;
+};
+
+
+export type QueryGetTeamArgs = {
+  where: TeamWhereUniqueInput;
+};
+
+
+export type QueryGetTrackArgs = {
+  where: TrackWhereUniqueInput;
+};
+
+
+export type QueryGroupByCarArgs = {
+  by: Array<CarScalarFieldEnum>;
+  having?: InputMaybe<CarScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<CarOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CarWhereInput>;
+};
+
+
+export type QueryGroupByDriverArgs = {
+  by: Array<DriverScalarFieldEnum>;
+  having?: InputMaybe<DriverScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<DriverOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DriverWhereInput>;
 };
 
 
@@ -572,6 +1668,56 @@ export type QueryGroupByEventArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type QueryGroupByTeamArgs = {
+  by: Array<TeamScalarFieldEnum>;
+  having?: InputMaybe<TeamScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<TeamOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+
+export type QueryGroupByTrackArgs = {
+  by: Array<TrackScalarFieldEnum>;
+  having?: InputMaybe<TrackScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<TrackOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+
+export type QueryTeamArgs = {
+  where: TeamWhereUniqueInput;
+};
+
+
+export type QueryTeamsArgs = {
+  cursor?: InputMaybe<TeamWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TeamScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TeamOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+
+export type QueryTrackArgs = {
+  where: TrackWhereUniqueInput;
+};
+
+
+export type QueryTracksArgs = {
+  cursor?: InputMaybe<TrackWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TrackScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TrackOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TrackWhereInput>;
 };
 
 export enum SortOrder {
@@ -650,25 +1796,621 @@ export type StringWithAggregatesFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Team = {
+  __typename?: 'Team';
+  _count?: Maybe<TeamCount>;
+  car: Car;
+  carId: Scalars['String']['output'];
+  drivers: Array<Driver>;
+  events: Array<Event>;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+
+export type TeamDriversArgs = {
+  cursor?: InputMaybe<DriverWhereUniqueInput>;
+  distinct?: InputMaybe<Array<DriverScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<DriverOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DriverWhereInput>;
+};
+
+
+export type TeamEventsArgs = {
+  cursor?: InputMaybe<EventWhereUniqueInput>;
+  distinct?: InputMaybe<Array<EventScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<EventOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<EventWhereInput>;
+};
+
+export type TeamCount = {
+  __typename?: 'TeamCount';
+  drivers: Scalars['Int']['output'];
+  events: Scalars['Int']['output'];
+};
+
+
+export type TeamCountDriversArgs = {
+  where?: InputMaybe<DriverWhereInput>;
+};
+
+
+export type TeamCountEventsArgs = {
+  where?: InputMaybe<EventWhereInput>;
+};
+
+export type TeamCountAggregate = {
+  __typename?: 'TeamCountAggregate';
+  _all: Scalars['Int']['output'];
+  carId: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+};
+
+export type TeamCountOrderByAggregateInput = {
+  carId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TeamCreateInput = {
+  car: CarCreateNestedOneWithoutTeamsInput;
+  drivers?: InputMaybe<DriverCreateNestedManyWithoutTeamInput>;
+  events?: InputMaybe<EventCreateNestedManyWithoutTeamInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type TeamCreateNestedManyWithoutCarInput = {
+  connect?: InputMaybe<Array<TeamWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<TeamCreateOrConnectWithoutCarInput>>;
+  create?: InputMaybe<Array<TeamCreateWithoutCarInput>>;
+};
+
+export type TeamCreateNestedOneWithoutDriversInput = {
+  connect?: InputMaybe<TeamWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<TeamCreateOrConnectWithoutDriversInput>;
+  create?: InputMaybe<TeamCreateWithoutDriversInput>;
+};
+
+export type TeamCreateNestedOneWithoutEventsInput = {
+  connect?: InputMaybe<TeamWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<TeamCreateOrConnectWithoutEventsInput>;
+  create?: InputMaybe<TeamCreateWithoutEventsInput>;
+};
+
+export type TeamCreateOrConnectWithoutCarInput = {
+  create: TeamCreateWithoutCarInput;
+  where: TeamWhereUniqueInput;
+};
+
+export type TeamCreateOrConnectWithoutDriversInput = {
+  create: TeamCreateWithoutDriversInput;
+  where: TeamWhereUniqueInput;
+};
+
+export type TeamCreateOrConnectWithoutEventsInput = {
+  create: TeamCreateWithoutEventsInput;
+  where: TeamWhereUniqueInput;
+};
+
+export type TeamCreateWithoutCarInput = {
+  drivers?: InputMaybe<DriverCreateNestedManyWithoutTeamInput>;
+  events?: InputMaybe<EventCreateNestedManyWithoutTeamInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type TeamCreateWithoutDriversInput = {
+  car: CarCreateNestedOneWithoutTeamsInput;
+  events?: InputMaybe<EventCreateNestedManyWithoutTeamInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type TeamCreateWithoutEventsInput = {
+  car: CarCreateNestedOneWithoutTeamsInput;
+  drivers?: InputMaybe<DriverCreateNestedManyWithoutTeamInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type TeamGroupBy = {
+  __typename?: 'TeamGroupBy';
+  _count?: Maybe<TeamCountAggregate>;
+  _max?: Maybe<TeamMaxAggregate>;
+  _min?: Maybe<TeamMinAggregate>;
+  carId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type TeamListRelationFilter = {
+  every?: InputMaybe<TeamWhereInput>;
+  none?: InputMaybe<TeamWhereInput>;
+  some?: InputMaybe<TeamWhereInput>;
+};
+
+export type TeamMaxAggregate = {
+  __typename?: 'TeamMaxAggregate';
+  carId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type TeamMaxOrderByAggregateInput = {
+  carId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TeamMinAggregate = {
+  __typename?: 'TeamMinAggregate';
+  carId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type TeamMinOrderByAggregateInput = {
+  carId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TeamOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type TeamOrderByWithAggregationInput = {
+  _count?: InputMaybe<TeamCountOrderByAggregateInput>;
+  _max?: InputMaybe<TeamMaxOrderByAggregateInput>;
+  _min?: InputMaybe<TeamMinOrderByAggregateInput>;
+  carId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TeamOrderByWithRelationInput = {
+  car?: InputMaybe<CarOrderByWithRelationInput>;
+  carId?: InputMaybe<SortOrder>;
+  drivers?: InputMaybe<DriverOrderByRelationAggregateInput>;
+  events?: InputMaybe<EventOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TeamRelationFilter = {
+  is?: InputMaybe<TeamWhereInput>;
+  isNot?: InputMaybe<TeamWhereInput>;
+};
+
+export enum TeamScalarFieldEnum {
+  CarId = 'carId',
+  Id = 'id',
+  Name = 'name'
+}
+
+export type TeamScalarWhereInput = {
+  AND?: InputMaybe<Array<TeamScalarWhereInput>>;
+  NOT?: InputMaybe<Array<TeamScalarWhereInput>>;
+  OR?: InputMaybe<Array<TeamScalarWhereInput>>;
+  carId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type TeamScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<TeamScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<TeamScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<TeamScalarWhereWithAggregatesInput>>;
+  carId?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type TeamUpdateInput = {
+  car?: InputMaybe<CarUpdateOneRequiredWithoutTeamsNestedInput>;
+  drivers?: InputMaybe<DriverUpdateManyWithoutTeamNestedInput>;
+  events?: InputMaybe<EventUpdateManyWithoutTeamNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TeamUpdateManyMutationInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TeamUpdateManyWithWhereWithoutCarInput = {
+  data: TeamUpdateManyMutationInput;
+  where: TeamScalarWhereInput;
+};
+
+export type TeamUpdateManyWithoutCarNestedInput = {
+  connect?: InputMaybe<Array<TeamWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<TeamCreateOrConnectWithoutCarInput>>;
+  create?: InputMaybe<Array<TeamCreateWithoutCarInput>>;
+  delete?: InputMaybe<Array<TeamWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<TeamScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<TeamWhereUniqueInput>>;
+  set?: InputMaybe<Array<TeamWhereUniqueInput>>;
+  update?: InputMaybe<Array<TeamUpdateWithWhereUniqueWithoutCarInput>>;
+  updateMany?: InputMaybe<Array<TeamUpdateManyWithWhereWithoutCarInput>>;
+  upsert?: InputMaybe<Array<TeamUpsertWithWhereUniqueWithoutCarInput>>;
+};
+
+export type TeamUpdateOneRequiredWithoutDriversNestedInput = {
+  connect?: InputMaybe<TeamWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<TeamCreateOrConnectWithoutDriversInput>;
+  create?: InputMaybe<TeamCreateWithoutDriversInput>;
+  update?: InputMaybe<TeamUpdateToOneWithWhereWithoutDriversInput>;
+  upsert?: InputMaybe<TeamUpsertWithoutDriversInput>;
+};
+
+export type TeamUpdateOneRequiredWithoutEventsNestedInput = {
+  connect?: InputMaybe<TeamWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<TeamCreateOrConnectWithoutEventsInput>;
+  create?: InputMaybe<TeamCreateWithoutEventsInput>;
+  update?: InputMaybe<TeamUpdateToOneWithWhereWithoutEventsInput>;
+  upsert?: InputMaybe<TeamUpsertWithoutEventsInput>;
+};
+
+export type TeamUpdateToOneWithWhereWithoutDriversInput = {
+  data: TeamUpdateWithoutDriversInput;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+export type TeamUpdateToOneWithWhereWithoutEventsInput = {
+  data: TeamUpdateWithoutEventsInput;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+export type TeamUpdateWithWhereUniqueWithoutCarInput = {
+  data: TeamUpdateWithoutCarInput;
+  where: TeamWhereUniqueInput;
+};
+
+export type TeamUpdateWithoutCarInput = {
+  drivers?: InputMaybe<DriverUpdateManyWithoutTeamNestedInput>;
+  events?: InputMaybe<EventUpdateManyWithoutTeamNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TeamUpdateWithoutDriversInput = {
+  car?: InputMaybe<CarUpdateOneRequiredWithoutTeamsNestedInput>;
+  events?: InputMaybe<EventUpdateManyWithoutTeamNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TeamUpdateWithoutEventsInput = {
+  car?: InputMaybe<CarUpdateOneRequiredWithoutTeamsNestedInput>;
+  drivers?: InputMaybe<DriverUpdateManyWithoutTeamNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TeamUpsertWithWhereUniqueWithoutCarInput = {
+  create: TeamCreateWithoutCarInput;
+  update: TeamUpdateWithoutCarInput;
+  where: TeamWhereUniqueInput;
+};
+
+export type TeamUpsertWithoutDriversInput = {
+  create: TeamCreateWithoutDriversInput;
+  update: TeamUpdateWithoutDriversInput;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+export type TeamUpsertWithoutEventsInput = {
+  create: TeamCreateWithoutEventsInput;
+  update: TeamUpdateWithoutEventsInput;
+  where?: InputMaybe<TeamWhereInput>;
+};
+
+export type TeamWhereInput = {
+  AND?: InputMaybe<Array<TeamWhereInput>>;
+  NOT?: InputMaybe<Array<TeamWhereInput>>;
+  OR?: InputMaybe<Array<TeamWhereInput>>;
+  car?: InputMaybe<CarRelationFilter>;
+  carId?: InputMaybe<StringFilter>;
+  drivers?: InputMaybe<DriverListRelationFilter>;
+  events?: InputMaybe<EventListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type TeamWhereUniqueInput = {
+  AND?: InputMaybe<Array<TeamWhereInput>>;
+  NOT?: InputMaybe<Array<TeamWhereInput>>;
+  OR?: InputMaybe<Array<TeamWhereInput>>;
+  car?: InputMaybe<CarRelationFilter>;
+  carId?: InputMaybe<StringFilter>;
+  drivers?: InputMaybe<DriverListRelationFilter>;
+  events?: InputMaybe<EventListRelationFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type Track = {
+  __typename?: 'Track';
+  _count?: Maybe<TrackCount>;
+  events: Array<Event>;
+  id: Scalars['String']['output'];
+  layout: Scalars['String']['output'];
+  length: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+
+export type TrackEventsArgs = {
+  cursor?: InputMaybe<EventWhereUniqueInput>;
+  distinct?: InputMaybe<Array<EventScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<EventOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<EventWhereInput>;
+};
+
+export type TrackAvgAggregate = {
+  __typename?: 'TrackAvgAggregate';
+  length?: Maybe<Scalars['Float']['output']>;
+};
+
+export type TrackAvgOrderByAggregateInput = {
+  length?: InputMaybe<SortOrder>;
+};
+
+export type TrackCount = {
+  __typename?: 'TrackCount';
+  events: Scalars['Int']['output'];
+};
+
+
+export type TrackCountEventsArgs = {
+  where?: InputMaybe<EventWhereInput>;
+};
+
+export type TrackCountAggregate = {
+  __typename?: 'TrackCountAggregate';
+  _all: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  layout: Scalars['Int']['output'];
+  length: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+};
+
+export type TrackCountOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+  layout?: InputMaybe<SortOrder>;
+  length?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TrackCreateInput = {
+  events?: InputMaybe<EventCreateNestedManyWithoutTrackInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  layout: Scalars['String']['input'];
+  length: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type TrackCreateNestedOneWithoutEventsInput = {
+  connect?: InputMaybe<TrackWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<TrackCreateOrConnectWithoutEventsInput>;
+  create?: InputMaybe<TrackCreateWithoutEventsInput>;
+};
+
+export type TrackCreateOrConnectWithoutEventsInput = {
+  create: TrackCreateWithoutEventsInput;
+  where: TrackWhereUniqueInput;
+};
+
+export type TrackCreateWithoutEventsInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  layout: Scalars['String']['input'];
+  length: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type TrackGroupBy = {
+  __typename?: 'TrackGroupBy';
+  _avg?: Maybe<TrackAvgAggregate>;
+  _count?: Maybe<TrackCountAggregate>;
+  _max?: Maybe<TrackMaxAggregate>;
+  _min?: Maybe<TrackMinAggregate>;
+  _sum?: Maybe<TrackSumAggregate>;
+  id: Scalars['String']['output'];
+  layout: Scalars['String']['output'];
+  length: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type TrackMaxAggregate = {
+  __typename?: 'TrackMaxAggregate';
+  id?: Maybe<Scalars['String']['output']>;
+  layout?: Maybe<Scalars['String']['output']>;
+  length?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type TrackMaxOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+  layout?: InputMaybe<SortOrder>;
+  length?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TrackMinAggregate = {
+  __typename?: 'TrackMinAggregate';
+  id?: Maybe<Scalars['String']['output']>;
+  layout?: Maybe<Scalars['String']['output']>;
+  length?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type TrackMinOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+  layout?: InputMaybe<SortOrder>;
+  length?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TrackOrderByWithAggregationInput = {
+  _avg?: InputMaybe<TrackAvgOrderByAggregateInput>;
+  _count?: InputMaybe<TrackCountOrderByAggregateInput>;
+  _max?: InputMaybe<TrackMaxOrderByAggregateInput>;
+  _min?: InputMaybe<TrackMinOrderByAggregateInput>;
+  _sum?: InputMaybe<TrackSumOrderByAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  layout?: InputMaybe<SortOrder>;
+  length?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TrackOrderByWithRelationInput = {
+  events?: InputMaybe<EventOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  layout?: InputMaybe<SortOrder>;
+  length?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type TrackRelationFilter = {
+  is?: InputMaybe<TrackWhereInput>;
+  isNot?: InputMaybe<TrackWhereInput>;
+};
+
+export enum TrackScalarFieldEnum {
+  Id = 'id',
+  Layout = 'layout',
+  Length = 'length',
+  Name = 'name'
+}
+
+export type TrackScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<TrackScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<TrackScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<TrackScalarWhereWithAggregatesInput>>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  layout?: InputMaybe<StringWithAggregatesFilter>;
+  length?: InputMaybe<IntWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type TrackSumAggregate = {
+  __typename?: 'TrackSumAggregate';
+  length?: Maybe<Scalars['Int']['output']>;
+};
+
+export type TrackSumOrderByAggregateInput = {
+  length?: InputMaybe<SortOrder>;
+};
+
+export type TrackUpdateInput = {
+  events?: InputMaybe<EventUpdateManyWithoutTrackNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  layout?: InputMaybe<StringFieldUpdateOperationsInput>;
+  length?: InputMaybe<IntFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TrackUpdateManyMutationInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  layout?: InputMaybe<StringFieldUpdateOperationsInput>;
+  length?: InputMaybe<IntFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TrackUpdateOneRequiredWithoutEventsNestedInput = {
+  connect?: InputMaybe<TrackWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<TrackCreateOrConnectWithoutEventsInput>;
+  create?: InputMaybe<TrackCreateWithoutEventsInput>;
+  update?: InputMaybe<TrackUpdateToOneWithWhereWithoutEventsInput>;
+  upsert?: InputMaybe<TrackUpsertWithoutEventsInput>;
+};
+
+export type TrackUpdateToOneWithWhereWithoutEventsInput = {
+  data: TrackUpdateWithoutEventsInput;
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+export type TrackUpdateWithoutEventsInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  layout?: InputMaybe<StringFieldUpdateOperationsInput>;
+  length?: InputMaybe<IntFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TrackUpsertWithoutEventsInput = {
+  create: TrackCreateWithoutEventsInput;
+  update: TrackUpdateWithoutEventsInput;
+  where?: InputMaybe<TrackWhereInput>;
+};
+
+export type TrackWhereInput = {
+  AND?: InputMaybe<Array<TrackWhereInput>>;
+  NOT?: InputMaybe<Array<TrackWhereInput>>;
+  OR?: InputMaybe<Array<TrackWhereInput>>;
+  events?: InputMaybe<EventListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  layout?: InputMaybe<StringFilter>;
+  length?: InputMaybe<IntFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type TrackWhereUniqueInput = {
+  AND?: InputMaybe<Array<TrackWhereInput>>;
+  NOT?: InputMaybe<Array<TrackWhereInput>>;
+  OR?: InputMaybe<Array<TrackWhereInput>>;
+  events?: InputMaybe<EventListRelationFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  layout?: InputMaybe<StringFilter>;
+  length?: InputMaybe<IntFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type EventCardFragment = { __typename?: 'Event', id: string, name: string, series?: string | null, sessionStart: any, raceStartSim: any, duration: number, greenFlagOffset: number, team: { __typename?: 'Team', name: string, car: { __typename?: 'Car', name: string, class: string } }, track: { __typename?: 'Track', name: string, layout: string } };
+
 export type GetEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, series?: string | null, sessionStart: any, raceStartSim: any, duration: number, greenFlagOffset: number }> };
+export type GetEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, series?: string | null, sessionStart: any, raceStartSim: any, duration: number, greenFlagOffset: number, team: { __typename?: 'Team', name: string, car: { __typename?: 'Car', name: string, class: string } }, track: { __typename?: 'Track', name: string, layout: string } }> };
 
-
-export const GetEventsDocument = gql`
-    query GetEvents {
-  events {
-    id
+export const EventCardFragmentDoc = gql`
+    fragment EventCard on Event {
+  id
+  name
+  series
+  sessionStart
+  raceStartSim
+  duration
+  greenFlagOffset
+  team {
     name
-    series
-    sessionStart
-    raceStartSim
-    duration
-    greenFlagOffset
+    car {
+      name
+      class
+    }
+  }
+  track {
+    name
+    layout
   }
 }
     `;
+export const GetEventsDocument = gql`
+    query GetEvents {
+  events {
+    ...EventCard
+  }
+}
+    ${EventCardFragmentDoc}`;
 
 /**
  * __useGetEventsQuery__

@@ -1,11 +1,26 @@
+fragment EventCard on Event {
+    id
+    name
+    series
+    sessionStart
+    raceStartSim
+    duration
+    greenFlagOffset
+    team {
+        name
+        car {
+            name
+            class
+        }
+    }
+    track {
+        name
+        layout
+    }
+}
+
 query GetEvents {
     events {
-        id
-        name
-        series
-        sessionStart
-        raceStartSim
-        duration
-        greenFlagOffset
+        ...EventCard
     }
 }

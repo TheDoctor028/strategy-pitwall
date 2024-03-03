@@ -13,6 +13,44 @@ generator typegraphql {
   formatGeneratedCode = false
 }
 
+model Car {
+    id String @id @default(uuid()) @unique
+    name String
+    class String // ? Maybe create enum for this
+    fuelTankSize Int
+
+    teams Team[]
+}
+
+model Driver {
+    id String @id @default(uuid()) @unique
+    name String
+    utcOffset Int
+    rating Int
+
+    team Team @relation(fields: [teamId], references: [id])  // TODO 1 drive to multiple teams
+    teamId String
+}
+
+model Team {
+    id String @id @default(uuid()) @unique
+    name String
+    drivers Driver[]
+
+    car Car @relation(fields: [carId], references: [id])
+    carId String
+
+    events Event[]
+}
+
+model Track {
+    id String @id @default(uuid()) @unique
+    name String
+    layout String
+    length Int
+
+    events Event[]
+}
 
 model Event {
     id              String  @id @default(uuid()) @unique
@@ -23,5 +61,9 @@ model Event {
     sessionStart    DateTime
     raceStartSim    DateTime
 
-    // TODO Add track and team
+    track           Track @relation(fields: [trackId], references: [id])
+    trackId         String
+
+    team            Team @relation(fields: [teamId], references: [id])
+    teamId          String
 }

@@ -1,8 +1,8 @@
 import {Button, Card} from "react-bootstrap";
-import {IEvent} from "node-strategy-pitwall";
+import { EventCardFragment} from "../graphql/types/generated-types";
 
 interface IEventCardProps {
-    event: IEvent;
+    event: EventCardFragment;
 }
 
 export function EventCard({ event }: IEventCardProps) {
@@ -12,7 +12,7 @@ export function EventCard({ event }: IEventCardProps) {
                 <Card.Title>{event.name}</Card.Title>
                 <Card.Body className="text-left">
                     <Card.Text>
-                        <strong>Series:</strong> {event.series}
+                        <strong>Series:</strong> {event.series || '-'}
                     </Card.Text>
                     <Card.Text>
                         <strong>Track Name:</strong> {event.track.name}

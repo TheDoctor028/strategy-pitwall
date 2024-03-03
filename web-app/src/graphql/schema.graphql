@@ -3,12 +3,257 @@ type AffectedRowsOutput {
   count: Int!
 }
 
+type AggregateCar {
+  _avg: CarAvgAggregate
+  _count: CarCountAggregate
+  _max: CarMaxAggregate
+  _min: CarMinAggregate
+  _sum: CarSumAggregate
+}
+
+type AggregateDriver {
+  _avg: DriverAvgAggregate
+  _count: DriverCountAggregate
+  _max: DriverMaxAggregate
+  _min: DriverMinAggregate
+  _sum: DriverSumAggregate
+}
+
 type AggregateEvent {
   _avg: EventAvgAggregate
   _count: EventCountAggregate
   _max: EventMaxAggregate
   _min: EventMinAggregate
   _sum: EventSumAggregate
+}
+
+type AggregateTeam {
+  _count: TeamCountAggregate
+  _max: TeamMaxAggregate
+  _min: TeamMinAggregate
+}
+
+type AggregateTrack {
+  _avg: TrackAvgAggregate
+  _count: TrackCountAggregate
+  _max: TrackMaxAggregate
+  _min: TrackMinAggregate
+  _sum: TrackSumAggregate
+}
+
+type Car {
+  _count: CarCount
+  class: String!
+  fuelTankSize: Int!
+  id: String!
+  name: String!
+  teams(cursor: TeamWhereUniqueInput, distinct: [TeamScalarFieldEnum!], orderBy: [TeamOrderByWithRelationInput!], skip: Int, take: Int, where: TeamWhereInput): [Team!]!
+}
+
+type CarAvgAggregate {
+  fuelTankSize: Float
+}
+
+input CarAvgOrderByAggregateInput {
+  fuelTankSize: SortOrder
+}
+
+type CarCount {
+  teams(where: TeamWhereInput): Int!
+}
+
+type CarCountAggregate {
+  _all: Int!
+  class: Int!
+  fuelTankSize: Int!
+  id: Int!
+  name: Int!
+}
+
+input CarCountOrderByAggregateInput {
+  class: SortOrder
+  fuelTankSize: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+input CarCreateInput {
+  class: String!
+  fuelTankSize: Int!
+  id: String
+  name: String!
+  teams: TeamCreateNestedManyWithoutCarInput
+}
+
+input CarCreateNestedOneWithoutTeamsInput {
+  connect: CarWhereUniqueInput
+  connectOrCreate: CarCreateOrConnectWithoutTeamsInput
+  create: CarCreateWithoutTeamsInput
+}
+
+input CarCreateOrConnectWithoutTeamsInput {
+  create: CarCreateWithoutTeamsInput!
+  where: CarWhereUniqueInput!
+}
+
+input CarCreateWithoutTeamsInput {
+  class: String!
+  fuelTankSize: Int!
+  id: String
+  name: String!
+}
+
+type CarGroupBy {
+  _avg: CarAvgAggregate
+  _count: CarCountAggregate
+  _max: CarMaxAggregate
+  _min: CarMinAggregate
+  _sum: CarSumAggregate
+  class: String!
+  fuelTankSize: Int!
+  id: String!
+  name: String!
+}
+
+type CarMaxAggregate {
+  class: String
+  fuelTankSize: Int
+  id: String
+  name: String
+}
+
+input CarMaxOrderByAggregateInput {
+  class: SortOrder
+  fuelTankSize: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+type CarMinAggregate {
+  class: String
+  fuelTankSize: Int
+  id: String
+  name: String
+}
+
+input CarMinOrderByAggregateInput {
+  class: SortOrder
+  fuelTankSize: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+input CarOrderByWithAggregationInput {
+  _avg: CarAvgOrderByAggregateInput
+  _count: CarCountOrderByAggregateInput
+  _max: CarMaxOrderByAggregateInput
+  _min: CarMinOrderByAggregateInput
+  _sum: CarSumOrderByAggregateInput
+  class: SortOrder
+  fuelTankSize: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+input CarOrderByWithRelationInput {
+  class: SortOrder
+  fuelTankSize: SortOrder
+  id: SortOrder
+  name: SortOrder
+  teams: TeamOrderByRelationAggregateInput
+}
+
+input CarRelationFilter {
+  is: CarWhereInput
+  isNot: CarWhereInput
+}
+
+enum CarScalarFieldEnum {
+  class
+  fuelTankSize
+  id
+  name
+}
+
+input CarScalarWhereWithAggregatesInput {
+  AND: [CarScalarWhereWithAggregatesInput!]
+  NOT: [CarScalarWhereWithAggregatesInput!]
+  OR: [CarScalarWhereWithAggregatesInput!]
+  class: StringWithAggregatesFilter
+  fuelTankSize: IntWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+}
+
+type CarSumAggregate {
+  fuelTankSize: Int
+}
+
+input CarSumOrderByAggregateInput {
+  fuelTankSize: SortOrder
+}
+
+input CarUpdateInput {
+  class: StringFieldUpdateOperationsInput
+  fuelTankSize: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  teams: TeamUpdateManyWithoutCarNestedInput
+}
+
+input CarUpdateManyMutationInput {
+  class: StringFieldUpdateOperationsInput
+  fuelTankSize: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input CarUpdateOneRequiredWithoutTeamsNestedInput {
+  connect: CarWhereUniqueInput
+  connectOrCreate: CarCreateOrConnectWithoutTeamsInput
+  create: CarCreateWithoutTeamsInput
+  update: CarUpdateToOneWithWhereWithoutTeamsInput
+  upsert: CarUpsertWithoutTeamsInput
+}
+
+input CarUpdateToOneWithWhereWithoutTeamsInput {
+  data: CarUpdateWithoutTeamsInput!
+  where: CarWhereInput
+}
+
+input CarUpdateWithoutTeamsInput {
+  class: StringFieldUpdateOperationsInput
+  fuelTankSize: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input CarUpsertWithoutTeamsInput {
+  create: CarCreateWithoutTeamsInput!
+  update: CarUpdateWithoutTeamsInput!
+  where: CarWhereInput
+}
+
+input CarWhereInput {
+  AND: [CarWhereInput!]
+  NOT: [CarWhereInput!]
+  OR: [CarWhereInput!]
+  class: StringFilter
+  fuelTankSize: IntFilter
+  id: StringFilter
+  name: StringFilter
+  teams: TeamListRelationFilter
+}
+
+input CarWhereUniqueInput {
+  AND: [CarWhereInput!]
+  NOT: [CarWhereInput!]
+  OR: [CarWhereInput!]
+  class: StringFilter
+  fuelTankSize: IntFilter
+  id: String
+  name: StringFilter
+  teams: TeamListRelationFilter
 }
 
 input DateTimeFieldUpdateOperationsInput {
@@ -45,6 +290,260 @@ input DateTimeWithAggregatesFilter {
   notIn: [DateTimeISO!]
 }
 
+type Driver {
+  id: String!
+  name: String!
+  rating: Int!
+  team: Team!
+  teamId: String!
+  utcOffset: Int!
+}
+
+type DriverAvgAggregate {
+  rating: Float
+  utcOffset: Float
+}
+
+input DriverAvgOrderByAggregateInput {
+  rating: SortOrder
+  utcOffset: SortOrder
+}
+
+type DriverCountAggregate {
+  _all: Int!
+  id: Int!
+  name: Int!
+  rating: Int!
+  teamId: Int!
+  utcOffset: Int!
+}
+
+input DriverCountOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+  rating: SortOrder
+  teamId: SortOrder
+  utcOffset: SortOrder
+}
+
+input DriverCreateInput {
+  id: String
+  name: String!
+  rating: Int!
+  team: TeamCreateNestedOneWithoutDriversInput!
+  utcOffset: Int!
+}
+
+input DriverCreateNestedManyWithoutTeamInput {
+  connect: [DriverWhereUniqueInput!]
+  connectOrCreate: [DriverCreateOrConnectWithoutTeamInput!]
+  create: [DriverCreateWithoutTeamInput!]
+}
+
+input DriverCreateOrConnectWithoutTeamInput {
+  create: DriverCreateWithoutTeamInput!
+  where: DriverWhereUniqueInput!
+}
+
+input DriverCreateWithoutTeamInput {
+  id: String
+  name: String!
+  rating: Int!
+  utcOffset: Int!
+}
+
+type DriverGroupBy {
+  _avg: DriverAvgAggregate
+  _count: DriverCountAggregate
+  _max: DriverMaxAggregate
+  _min: DriverMinAggregate
+  _sum: DriverSumAggregate
+  id: String!
+  name: String!
+  rating: Int!
+  teamId: String!
+  utcOffset: Int!
+}
+
+input DriverListRelationFilter {
+  every: DriverWhereInput
+  none: DriverWhereInput
+  some: DriverWhereInput
+}
+
+type DriverMaxAggregate {
+  id: String
+  name: String
+  rating: Int
+  teamId: String
+  utcOffset: Int
+}
+
+input DriverMaxOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+  rating: SortOrder
+  teamId: SortOrder
+  utcOffset: SortOrder
+}
+
+type DriverMinAggregate {
+  id: String
+  name: String
+  rating: Int
+  teamId: String
+  utcOffset: Int
+}
+
+input DriverMinOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+  rating: SortOrder
+  teamId: SortOrder
+  utcOffset: SortOrder
+}
+
+input DriverOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input DriverOrderByWithAggregationInput {
+  _avg: DriverAvgOrderByAggregateInput
+  _count: DriverCountOrderByAggregateInput
+  _max: DriverMaxOrderByAggregateInput
+  _min: DriverMinOrderByAggregateInput
+  _sum: DriverSumOrderByAggregateInput
+  id: SortOrder
+  name: SortOrder
+  rating: SortOrder
+  teamId: SortOrder
+  utcOffset: SortOrder
+}
+
+input DriverOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  rating: SortOrder
+  team: TeamOrderByWithRelationInput
+  teamId: SortOrder
+  utcOffset: SortOrder
+}
+
+enum DriverScalarFieldEnum {
+  id
+  name
+  rating
+  teamId
+  utcOffset
+}
+
+input DriverScalarWhereInput {
+  AND: [DriverScalarWhereInput!]
+  NOT: [DriverScalarWhereInput!]
+  OR: [DriverScalarWhereInput!]
+  id: StringFilter
+  name: StringFilter
+  rating: IntFilter
+  teamId: StringFilter
+  utcOffset: IntFilter
+}
+
+input DriverScalarWhereWithAggregatesInput {
+  AND: [DriverScalarWhereWithAggregatesInput!]
+  NOT: [DriverScalarWhereWithAggregatesInput!]
+  OR: [DriverScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  rating: IntWithAggregatesFilter
+  teamId: StringWithAggregatesFilter
+  utcOffset: IntWithAggregatesFilter
+}
+
+type DriverSumAggregate {
+  rating: Int
+  utcOffset: Int
+}
+
+input DriverSumOrderByAggregateInput {
+  rating: SortOrder
+  utcOffset: SortOrder
+}
+
+input DriverUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  rating: IntFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutDriversNestedInput
+  utcOffset: IntFieldUpdateOperationsInput
+}
+
+input DriverUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  rating: IntFieldUpdateOperationsInput
+  utcOffset: IntFieldUpdateOperationsInput
+}
+
+input DriverUpdateManyWithWhereWithoutTeamInput {
+  data: DriverUpdateManyMutationInput!
+  where: DriverScalarWhereInput!
+}
+
+input DriverUpdateManyWithoutTeamNestedInput {
+  connect: [DriverWhereUniqueInput!]
+  connectOrCreate: [DriverCreateOrConnectWithoutTeamInput!]
+  create: [DriverCreateWithoutTeamInput!]
+  delete: [DriverWhereUniqueInput!]
+  deleteMany: [DriverScalarWhereInput!]
+  disconnect: [DriverWhereUniqueInput!]
+  set: [DriverWhereUniqueInput!]
+  update: [DriverUpdateWithWhereUniqueWithoutTeamInput!]
+  updateMany: [DriverUpdateManyWithWhereWithoutTeamInput!]
+  upsert: [DriverUpsertWithWhereUniqueWithoutTeamInput!]
+}
+
+input DriverUpdateWithWhereUniqueWithoutTeamInput {
+  data: DriverUpdateWithoutTeamInput!
+  where: DriverWhereUniqueInput!
+}
+
+input DriverUpdateWithoutTeamInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  rating: IntFieldUpdateOperationsInput
+  utcOffset: IntFieldUpdateOperationsInput
+}
+
+input DriverUpsertWithWhereUniqueWithoutTeamInput {
+  create: DriverCreateWithoutTeamInput!
+  update: DriverUpdateWithoutTeamInput!
+  where: DriverWhereUniqueInput!
+}
+
+input DriverWhereInput {
+  AND: [DriverWhereInput!]
+  NOT: [DriverWhereInput!]
+  OR: [DriverWhereInput!]
+  id: StringFilter
+  name: StringFilter
+  rating: IntFilter
+  team: TeamRelationFilter
+  teamId: StringFilter
+  utcOffset: IntFilter
+}
+
+input DriverWhereUniqueInput {
+  AND: [DriverWhereInput!]
+  NOT: [DriverWhereInput!]
+  OR: [DriverWhereInput!]
+  id: String
+  name: StringFilter
+  rating: IntFilter
+  team: TeamRelationFilter
+  teamId: StringFilter
+  utcOffset: IntFilter
+}
+
 type Event {
   duration: Int!
   greenFlagOffset: Int!
@@ -53,6 +552,10 @@ type Event {
   raceStartSim: DateTimeISO!
   series: String
   sessionStart: DateTimeISO!
+  team: Team!
+  teamId: String!
+  track: Track!
+  trackId: String!
 }
 
 type EventAvgAggregate {
@@ -74,6 +577,8 @@ type EventCountAggregate {
   raceStartSim: Int!
   series: Int!
   sessionStart: Int!
+  teamId: Int!
+  trackId: Int!
 }
 
 input EventCountOrderByAggregateInput {
@@ -84,6 +589,8 @@ input EventCountOrderByAggregateInput {
   raceStartSim: SortOrder
   series: SortOrder
   sessionStart: SortOrder
+  teamId: SortOrder
+  trackId: SortOrder
 }
 
 input EventCreateInput {
@@ -94,6 +601,52 @@ input EventCreateInput {
   raceStartSim: DateTimeISO!
   series: String
   sessionStart: DateTimeISO!
+  team: TeamCreateNestedOneWithoutEventsInput!
+  track: TrackCreateNestedOneWithoutEventsInput!
+}
+
+input EventCreateNestedManyWithoutTeamInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutTeamInput!]
+  create: [EventCreateWithoutTeamInput!]
+}
+
+input EventCreateNestedManyWithoutTrackInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutTrackInput!]
+  create: [EventCreateWithoutTrackInput!]
+}
+
+input EventCreateOrConnectWithoutTeamInput {
+  create: EventCreateWithoutTeamInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventCreateOrConnectWithoutTrackInput {
+  create: EventCreateWithoutTrackInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventCreateWithoutTeamInput {
+  duration: Int!
+  greenFlagOffset: Int!
+  id: String
+  name: String!
+  raceStartSim: DateTimeISO!
+  series: String
+  sessionStart: DateTimeISO!
+  track: TrackCreateNestedOneWithoutEventsInput!
+}
+
+input EventCreateWithoutTrackInput {
+  duration: Int!
+  greenFlagOffset: Int!
+  id: String
+  name: String!
+  raceStartSim: DateTimeISO!
+  series: String
+  sessionStart: DateTimeISO!
+  team: TeamCreateNestedOneWithoutEventsInput!
 }
 
 type EventGroupBy {
@@ -109,6 +662,14 @@ type EventGroupBy {
   raceStartSim: DateTimeISO!
   series: String
   sessionStart: DateTimeISO!
+  teamId: String!
+  trackId: String!
+}
+
+input EventListRelationFilter {
+  every: EventWhereInput
+  none: EventWhereInput
+  some: EventWhereInput
 }
 
 type EventMaxAggregate {
@@ -119,6 +680,8 @@ type EventMaxAggregate {
   raceStartSim: DateTimeISO
   series: String
   sessionStart: DateTimeISO
+  teamId: String
+  trackId: String
 }
 
 input EventMaxOrderByAggregateInput {
@@ -129,6 +692,8 @@ input EventMaxOrderByAggregateInput {
   raceStartSim: SortOrder
   series: SortOrder
   sessionStart: SortOrder
+  teamId: SortOrder
+  trackId: SortOrder
 }
 
 type EventMinAggregate {
@@ -139,6 +704,8 @@ type EventMinAggregate {
   raceStartSim: DateTimeISO
   series: String
   sessionStart: DateTimeISO
+  teamId: String
+  trackId: String
 }
 
 input EventMinOrderByAggregateInput {
@@ -149,6 +716,12 @@ input EventMinOrderByAggregateInput {
   raceStartSim: SortOrder
   series: SortOrder
   sessionStart: SortOrder
+  teamId: SortOrder
+  trackId: SortOrder
+}
+
+input EventOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input EventOrderByWithAggregationInput {
@@ -164,6 +737,8 @@ input EventOrderByWithAggregationInput {
   raceStartSim: SortOrder
   series: SortOrderInput
   sessionStart: SortOrder
+  teamId: SortOrder
+  trackId: SortOrder
 }
 
 input EventOrderByWithRelationInput {
@@ -174,6 +749,10 @@ input EventOrderByWithRelationInput {
   raceStartSim: SortOrder
   series: SortOrderInput
   sessionStart: SortOrder
+  team: TeamOrderByWithRelationInput
+  teamId: SortOrder
+  track: TrackOrderByWithRelationInput
+  trackId: SortOrder
 }
 
 enum EventScalarFieldEnum {
@@ -184,6 +763,23 @@ enum EventScalarFieldEnum {
   raceStartSim
   series
   sessionStart
+  teamId
+  trackId
+}
+
+input EventScalarWhereInput {
+  AND: [EventScalarWhereInput!]
+  NOT: [EventScalarWhereInput!]
+  OR: [EventScalarWhereInput!]
+  duration: IntFilter
+  greenFlagOffset: IntFilter
+  id: StringFilter
+  name: StringFilter
+  raceStartSim: DateTimeFilter
+  series: StringNullableFilter
+  sessionStart: DateTimeFilter
+  teamId: StringFilter
+  trackId: StringFilter
 }
 
 input EventScalarWhereWithAggregatesInput {
@@ -197,6 +793,8 @@ input EventScalarWhereWithAggregatesInput {
   raceStartSim: DateTimeWithAggregatesFilter
   series: StringNullableWithAggregatesFilter
   sessionStart: DateTimeWithAggregatesFilter
+  teamId: StringWithAggregatesFilter
+  trackId: StringWithAggregatesFilter
 }
 
 type EventSumAggregate {
@@ -217,6 +815,8 @@ input EventUpdateInput {
   raceStartSim: DateTimeFieldUpdateOperationsInput
   series: NullableStringFieldUpdateOperationsInput
   sessionStart: DateTimeFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutEventsNestedInput
+  track: TrackUpdateOneRequiredWithoutEventsNestedInput
 }
 
 input EventUpdateManyMutationInput {
@@ -227,6 +827,86 @@ input EventUpdateManyMutationInput {
   raceStartSim: DateTimeFieldUpdateOperationsInput
   series: NullableStringFieldUpdateOperationsInput
   sessionStart: DateTimeFieldUpdateOperationsInput
+}
+
+input EventUpdateManyWithWhereWithoutTeamInput {
+  data: EventUpdateManyMutationInput!
+  where: EventScalarWhereInput!
+}
+
+input EventUpdateManyWithWhereWithoutTrackInput {
+  data: EventUpdateManyMutationInput!
+  where: EventScalarWhereInput!
+}
+
+input EventUpdateManyWithoutTeamNestedInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutTeamInput!]
+  create: [EventCreateWithoutTeamInput!]
+  delete: [EventWhereUniqueInput!]
+  deleteMany: [EventScalarWhereInput!]
+  disconnect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutTeamInput!]
+  updateMany: [EventUpdateManyWithWhereWithoutTeamInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutTeamInput!]
+}
+
+input EventUpdateManyWithoutTrackNestedInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutTrackInput!]
+  create: [EventCreateWithoutTrackInput!]
+  delete: [EventWhereUniqueInput!]
+  deleteMany: [EventScalarWhereInput!]
+  disconnect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutTrackInput!]
+  updateMany: [EventUpdateManyWithWhereWithoutTrackInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutTrackInput!]
+}
+
+input EventUpdateWithWhereUniqueWithoutTeamInput {
+  data: EventUpdateWithoutTeamInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpdateWithWhereUniqueWithoutTrackInput {
+  data: EventUpdateWithoutTrackInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpdateWithoutTeamInput {
+  duration: IntFieldUpdateOperationsInput
+  greenFlagOffset: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  raceStartSim: DateTimeFieldUpdateOperationsInput
+  series: NullableStringFieldUpdateOperationsInput
+  sessionStart: DateTimeFieldUpdateOperationsInput
+  track: TrackUpdateOneRequiredWithoutEventsNestedInput
+}
+
+input EventUpdateWithoutTrackInput {
+  duration: IntFieldUpdateOperationsInput
+  greenFlagOffset: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  raceStartSim: DateTimeFieldUpdateOperationsInput
+  series: NullableStringFieldUpdateOperationsInput
+  sessionStart: DateTimeFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutEventsNestedInput
+}
+
+input EventUpsertWithWhereUniqueWithoutTeamInput {
+  create: EventCreateWithoutTeamInput!
+  update: EventUpdateWithoutTeamInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutTrackInput {
+  create: EventCreateWithoutTrackInput!
+  update: EventUpdateWithoutTrackInput!
+  where: EventWhereUniqueInput!
 }
 
 input EventWhereInput {
@@ -240,6 +920,10 @@ input EventWhereInput {
   raceStartSim: DateTimeFilter
   series: StringNullableFilter
   sessionStart: DateTimeFilter
+  team: TeamRelationFilter
+  teamId: StringFilter
+  track: TrackRelationFilter
+  trackId: StringFilter
 }
 
 input EventWhereUniqueInput {
@@ -253,6 +937,10 @@ input EventWhereUniqueInput {
   raceStartSim: DateTimeFilter
   series: StringNullableFilter
   sessionStart: DateTimeFilter
+  team: TeamRelationFilter
+  teamId: StringFilter
+  track: TrackRelationFilter
+  trackId: StringFilter
 }
 
 input IntFieldUpdateOperationsInput {
@@ -291,12 +979,36 @@ input IntWithAggregatesFilter {
 }
 
 type Mutation {
+  createOneCar(data: CarCreateInput!): Car!
+  createOneDriver(data: DriverCreateInput!): Driver!
   createOneEvent(data: EventCreateInput!): Event!
+  createOneTeam(data: TeamCreateInput!): Team!
+  createOneTrack(data: TrackCreateInput!): Track!
+  deleteManyCar(where: CarWhereInput): AffectedRowsOutput!
+  deleteManyDriver(where: DriverWhereInput): AffectedRowsOutput!
   deleteManyEvent(where: EventWhereInput): AffectedRowsOutput!
+  deleteManyTeam(where: TeamWhereInput): AffectedRowsOutput!
+  deleteManyTrack(where: TrackWhereInput): AffectedRowsOutput!
+  deleteOneCar(where: CarWhereUniqueInput!): Car
+  deleteOneDriver(where: DriverWhereUniqueInput!): Driver
   deleteOneEvent(where: EventWhereUniqueInput!): Event
+  deleteOneTeam(where: TeamWhereUniqueInput!): Team
+  deleteOneTrack(where: TrackWhereUniqueInput!): Track
+  updateManyCar(data: CarUpdateManyMutationInput!, where: CarWhereInput): AffectedRowsOutput!
+  updateManyDriver(data: DriverUpdateManyMutationInput!, where: DriverWhereInput): AffectedRowsOutput!
   updateManyEvent(data: EventUpdateManyMutationInput!, where: EventWhereInput): AffectedRowsOutput!
+  updateManyTeam(data: TeamUpdateManyMutationInput!, where: TeamWhereInput): AffectedRowsOutput!
+  updateManyTrack(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): AffectedRowsOutput!
+  updateOneCar(data: CarUpdateInput!, where: CarWhereUniqueInput!): Car
+  updateOneDriver(data: DriverUpdateInput!, where: DriverWhereUniqueInput!): Driver
   updateOneEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateOneTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
+  updateOneTrack(data: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track
+  upsertOneCar(create: CarCreateInput!, update: CarUpdateInput!, where: CarWhereUniqueInput!): Car!
+  upsertOneDriver(create: DriverCreateInput!, update: DriverUpdateInput!, where: DriverWhereUniqueInput!): Driver!
   upsertOneEvent(create: EventCreateInput!, update: EventUpdateInput!, where: EventWhereUniqueInput!): Event!
+  upsertOneTeam(create: TeamCreateInput!, update: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team!
+  upsertOneTrack(create: TrackCreateInput!, update: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track!
 }
 
 input NestedDateTimeFilter {
@@ -445,13 +1157,41 @@ enum NullsOrder {
 }
 
 type Query {
+  aggregateCar(cursor: CarWhereUniqueInput, orderBy: [CarOrderByWithRelationInput!], skip: Int, take: Int, where: CarWhereInput): AggregateCar!
+  aggregateDriver(cursor: DriverWhereUniqueInput, orderBy: [DriverOrderByWithRelationInput!], skip: Int, take: Int, where: DriverWhereInput): AggregateDriver!
   aggregateEvent(cursor: EventWhereUniqueInput, orderBy: [EventOrderByWithRelationInput!], skip: Int, take: Int, where: EventWhereInput): AggregateEvent!
+  aggregateTeam(cursor: TeamWhereUniqueInput, orderBy: [TeamOrderByWithRelationInput!], skip: Int, take: Int, where: TeamWhereInput): AggregateTeam!
+  aggregateTrack(cursor: TrackWhereUniqueInput, orderBy: [TrackOrderByWithRelationInput!], skip: Int, take: Int, where: TrackWhereInput): AggregateTrack!
+  car(where: CarWhereUniqueInput!): Car
+  cars(cursor: CarWhereUniqueInput, distinct: [CarScalarFieldEnum!], orderBy: [CarOrderByWithRelationInput!], skip: Int, take: Int, where: CarWhereInput): [Car!]!
+  driver(where: DriverWhereUniqueInput!): Driver
+  drivers(cursor: DriverWhereUniqueInput, distinct: [DriverScalarFieldEnum!], orderBy: [DriverOrderByWithRelationInput!], skip: Int, take: Int, where: DriverWhereInput): [Driver!]!
   event(where: EventWhereUniqueInput!): Event
   events(cursor: EventWhereUniqueInput, distinct: [EventScalarFieldEnum!], orderBy: [EventOrderByWithRelationInput!], skip: Int, take: Int, where: EventWhereInput): [Event!]!
+  findFirstCar(cursor: CarWhereUniqueInput, distinct: [CarScalarFieldEnum!], orderBy: [CarOrderByWithRelationInput!], skip: Int, take: Int, where: CarWhereInput): Car
+  findFirstCarOrThrow(cursor: CarWhereUniqueInput, distinct: [CarScalarFieldEnum!], orderBy: [CarOrderByWithRelationInput!], skip: Int, take: Int, where: CarWhereInput): Car
+  findFirstDriver(cursor: DriverWhereUniqueInput, distinct: [DriverScalarFieldEnum!], orderBy: [DriverOrderByWithRelationInput!], skip: Int, take: Int, where: DriverWhereInput): Driver
+  findFirstDriverOrThrow(cursor: DriverWhereUniqueInput, distinct: [DriverScalarFieldEnum!], orderBy: [DriverOrderByWithRelationInput!], skip: Int, take: Int, where: DriverWhereInput): Driver
   findFirstEvent(cursor: EventWhereUniqueInput, distinct: [EventScalarFieldEnum!], orderBy: [EventOrderByWithRelationInput!], skip: Int, take: Int, where: EventWhereInput): Event
   findFirstEventOrThrow(cursor: EventWhereUniqueInput, distinct: [EventScalarFieldEnum!], orderBy: [EventOrderByWithRelationInput!], skip: Int, take: Int, where: EventWhereInput): Event
+  findFirstTeam(cursor: TeamWhereUniqueInput, distinct: [TeamScalarFieldEnum!], orderBy: [TeamOrderByWithRelationInput!], skip: Int, take: Int, where: TeamWhereInput): Team
+  findFirstTeamOrThrow(cursor: TeamWhereUniqueInput, distinct: [TeamScalarFieldEnum!], orderBy: [TeamOrderByWithRelationInput!], skip: Int, take: Int, where: TeamWhereInput): Team
+  findFirstTrack(cursor: TrackWhereUniqueInput, distinct: [TrackScalarFieldEnum!], orderBy: [TrackOrderByWithRelationInput!], skip: Int, take: Int, where: TrackWhereInput): Track
+  findFirstTrackOrThrow(cursor: TrackWhereUniqueInput, distinct: [TrackScalarFieldEnum!], orderBy: [TrackOrderByWithRelationInput!], skip: Int, take: Int, where: TrackWhereInput): Track
+  getCar(where: CarWhereUniqueInput!): Car
+  getDriver(where: DriverWhereUniqueInput!): Driver
   getEvent(where: EventWhereUniqueInput!): Event
+  getTeam(where: TeamWhereUniqueInput!): Team
+  getTrack(where: TrackWhereUniqueInput!): Track
+  groupByCar(by: [CarScalarFieldEnum!]!, having: CarScalarWhereWithAggregatesInput, orderBy: [CarOrderByWithAggregationInput!], skip: Int, take: Int, where: CarWhereInput): [CarGroupBy!]!
+  groupByDriver(by: [DriverScalarFieldEnum!]!, having: DriverScalarWhereWithAggregatesInput, orderBy: [DriverOrderByWithAggregationInput!], skip: Int, take: Int, where: DriverWhereInput): [DriverGroupBy!]!
   groupByEvent(by: [EventScalarFieldEnum!]!, having: EventScalarWhereWithAggregatesInput, orderBy: [EventOrderByWithAggregationInput!], skip: Int, take: Int, where: EventWhereInput): [EventGroupBy!]!
+  groupByTeam(by: [TeamScalarFieldEnum!]!, having: TeamScalarWhereWithAggregatesInput, orderBy: [TeamOrderByWithAggregationInput!], skip: Int, take: Int, where: TeamWhereInput): [TeamGroupBy!]!
+  groupByTrack(by: [TrackScalarFieldEnum!]!, having: TrackScalarWhereWithAggregatesInput, orderBy: [TrackOrderByWithAggregationInput!], skip: Int, take: Int, where: TrackWhereInput): [TrackGroupBy!]!
+  team(where: TeamWhereUniqueInput!): Team
+  teams(cursor: TeamWhereUniqueInput, distinct: [TeamScalarFieldEnum!], orderBy: [TeamOrderByWithRelationInput!], skip: Int, take: Int, where: TeamWhereInput): [Team!]!
+  track(where: TrackWhereUniqueInput!): Track
+  tracks(cursor: TrackWhereUniqueInput, distinct: [TrackScalarFieldEnum!], orderBy: [TrackOrderByWithRelationInput!], skip: Int, take: Int, where: TrackWhereInput): [Track!]!
 }
 
 enum SortOrder {
@@ -528,4 +1268,524 @@ input StringWithAggregatesFilter {
   not: NestedStringWithAggregatesFilter
   notIn: [String!]
   startsWith: String
+}
+
+type Team {
+  _count: TeamCount
+  car: Car!
+  carId: String!
+  drivers(cursor: DriverWhereUniqueInput, distinct: [DriverScalarFieldEnum!], orderBy: [DriverOrderByWithRelationInput!], skip: Int, take: Int, where: DriverWhereInput): [Driver!]!
+  events(cursor: EventWhereUniqueInput, distinct: [EventScalarFieldEnum!], orderBy: [EventOrderByWithRelationInput!], skip: Int, take: Int, where: EventWhereInput): [Event!]!
+  id: String!
+  name: String!
+}
+
+type TeamCount {
+  drivers(where: DriverWhereInput): Int!
+  events(where: EventWhereInput): Int!
+}
+
+type TeamCountAggregate {
+  _all: Int!
+  carId: Int!
+  id: Int!
+  name: Int!
+}
+
+input TeamCountOrderByAggregateInput {
+  carId: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+input TeamCreateInput {
+  car: CarCreateNestedOneWithoutTeamsInput!
+  drivers: DriverCreateNestedManyWithoutTeamInput
+  events: EventCreateNestedManyWithoutTeamInput
+  id: String
+  name: String!
+}
+
+input TeamCreateNestedManyWithoutCarInput {
+  connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutCarInput!]
+  create: [TeamCreateWithoutCarInput!]
+}
+
+input TeamCreateNestedOneWithoutDriversInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutDriversInput
+  create: TeamCreateWithoutDriversInput
+}
+
+input TeamCreateNestedOneWithoutEventsInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutEventsInput
+  create: TeamCreateWithoutEventsInput
+}
+
+input TeamCreateOrConnectWithoutCarInput {
+  create: TeamCreateWithoutCarInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutDriversInput {
+  create: TeamCreateWithoutDriversInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutEventsInput {
+  create: TeamCreateWithoutEventsInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateWithoutCarInput {
+  drivers: DriverCreateNestedManyWithoutTeamInput
+  events: EventCreateNestedManyWithoutTeamInput
+  id: String
+  name: String!
+}
+
+input TeamCreateWithoutDriversInput {
+  car: CarCreateNestedOneWithoutTeamsInput!
+  events: EventCreateNestedManyWithoutTeamInput
+  id: String
+  name: String!
+}
+
+input TeamCreateWithoutEventsInput {
+  car: CarCreateNestedOneWithoutTeamsInput!
+  drivers: DriverCreateNestedManyWithoutTeamInput
+  id: String
+  name: String!
+}
+
+type TeamGroupBy {
+  _count: TeamCountAggregate
+  _max: TeamMaxAggregate
+  _min: TeamMinAggregate
+  carId: String!
+  id: String!
+  name: String!
+}
+
+input TeamListRelationFilter {
+  every: TeamWhereInput
+  none: TeamWhereInput
+  some: TeamWhereInput
+}
+
+type TeamMaxAggregate {
+  carId: String
+  id: String
+  name: String
+}
+
+input TeamMaxOrderByAggregateInput {
+  carId: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+type TeamMinAggregate {
+  carId: String
+  id: String
+  name: String
+}
+
+input TeamMinOrderByAggregateInput {
+  carId: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+input TeamOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input TeamOrderByWithAggregationInput {
+  _count: TeamCountOrderByAggregateInput
+  _max: TeamMaxOrderByAggregateInput
+  _min: TeamMinOrderByAggregateInput
+  carId: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+input TeamOrderByWithRelationInput {
+  car: CarOrderByWithRelationInput
+  carId: SortOrder
+  drivers: DriverOrderByRelationAggregateInput
+  events: EventOrderByRelationAggregateInput
+  id: SortOrder
+  name: SortOrder
+}
+
+input TeamRelationFilter {
+  is: TeamWhereInput
+  isNot: TeamWhereInput
+}
+
+enum TeamScalarFieldEnum {
+  carId
+  id
+  name
+}
+
+input TeamScalarWhereInput {
+  AND: [TeamScalarWhereInput!]
+  NOT: [TeamScalarWhereInput!]
+  OR: [TeamScalarWhereInput!]
+  carId: StringFilter
+  id: StringFilter
+  name: StringFilter
+}
+
+input TeamScalarWhereWithAggregatesInput {
+  AND: [TeamScalarWhereWithAggregatesInput!]
+  NOT: [TeamScalarWhereWithAggregatesInput!]
+  OR: [TeamScalarWhereWithAggregatesInput!]
+  carId: StringWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+}
+
+input TeamUpdateInput {
+  car: CarUpdateOneRequiredWithoutTeamsNestedInput
+  drivers: DriverUpdateManyWithoutTeamNestedInput
+  events: EventUpdateManyWithoutTeamNestedInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TeamUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TeamUpdateManyWithWhereWithoutCarInput {
+  data: TeamUpdateManyMutationInput!
+  where: TeamScalarWhereInput!
+}
+
+input TeamUpdateManyWithoutCarNestedInput {
+  connect: [TeamWhereUniqueInput!]
+  connectOrCreate: [TeamCreateOrConnectWithoutCarInput!]
+  create: [TeamCreateWithoutCarInput!]
+  delete: [TeamWhereUniqueInput!]
+  deleteMany: [TeamScalarWhereInput!]
+  disconnect: [TeamWhereUniqueInput!]
+  set: [TeamWhereUniqueInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutCarInput!]
+  updateMany: [TeamUpdateManyWithWhereWithoutCarInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutCarInput!]
+}
+
+input TeamUpdateOneRequiredWithoutDriversNestedInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutDriversInput
+  create: TeamCreateWithoutDriversInput
+  update: TeamUpdateToOneWithWhereWithoutDriversInput
+  upsert: TeamUpsertWithoutDriversInput
+}
+
+input TeamUpdateOneRequiredWithoutEventsNestedInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutEventsInput
+  create: TeamCreateWithoutEventsInput
+  update: TeamUpdateToOneWithWhereWithoutEventsInput
+  upsert: TeamUpsertWithoutEventsInput
+}
+
+input TeamUpdateToOneWithWhereWithoutDriversInput {
+  data: TeamUpdateWithoutDriversInput!
+  where: TeamWhereInput
+}
+
+input TeamUpdateToOneWithWhereWithoutEventsInput {
+  data: TeamUpdateWithoutEventsInput!
+  where: TeamWhereInput
+}
+
+input TeamUpdateWithWhereUniqueWithoutCarInput {
+  data: TeamUpdateWithoutCarInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamUpdateWithoutCarInput {
+  drivers: DriverUpdateManyWithoutTeamNestedInput
+  events: EventUpdateManyWithoutTeamNestedInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TeamUpdateWithoutDriversInput {
+  car: CarUpdateOneRequiredWithoutTeamsNestedInput
+  events: EventUpdateManyWithoutTeamNestedInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TeamUpdateWithoutEventsInput {
+  car: CarUpdateOneRequiredWithoutTeamsNestedInput
+  drivers: DriverUpdateManyWithoutTeamNestedInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TeamUpsertWithWhereUniqueWithoutCarInput {
+  create: TeamCreateWithoutCarInput!
+  update: TeamUpdateWithoutCarInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamUpsertWithoutDriversInput {
+  create: TeamCreateWithoutDriversInput!
+  update: TeamUpdateWithoutDriversInput!
+  where: TeamWhereInput
+}
+
+input TeamUpsertWithoutEventsInput {
+  create: TeamCreateWithoutEventsInput!
+  update: TeamUpdateWithoutEventsInput!
+  where: TeamWhereInput
+}
+
+input TeamWhereInput {
+  AND: [TeamWhereInput!]
+  NOT: [TeamWhereInput!]
+  OR: [TeamWhereInput!]
+  car: CarRelationFilter
+  carId: StringFilter
+  drivers: DriverListRelationFilter
+  events: EventListRelationFilter
+  id: StringFilter
+  name: StringFilter
+}
+
+input TeamWhereUniqueInput {
+  AND: [TeamWhereInput!]
+  NOT: [TeamWhereInput!]
+  OR: [TeamWhereInput!]
+  car: CarRelationFilter
+  carId: StringFilter
+  drivers: DriverListRelationFilter
+  events: EventListRelationFilter
+  id: String
+  name: StringFilter
+}
+
+type Track {
+  _count: TrackCount
+  events(cursor: EventWhereUniqueInput, distinct: [EventScalarFieldEnum!], orderBy: [EventOrderByWithRelationInput!], skip: Int, take: Int, where: EventWhereInput): [Event!]!
+  id: String!
+  layout: String!
+  length: Int!
+  name: String!
+}
+
+type TrackAvgAggregate {
+  length: Float
+}
+
+input TrackAvgOrderByAggregateInput {
+  length: SortOrder
+}
+
+type TrackCount {
+  events(where: EventWhereInput): Int!
+}
+
+type TrackCountAggregate {
+  _all: Int!
+  id: Int!
+  layout: Int!
+  length: Int!
+  name: Int!
+}
+
+input TrackCountOrderByAggregateInput {
+  id: SortOrder
+  layout: SortOrder
+  length: SortOrder
+  name: SortOrder
+}
+
+input TrackCreateInput {
+  events: EventCreateNestedManyWithoutTrackInput
+  id: String
+  layout: String!
+  length: Int!
+  name: String!
+}
+
+input TrackCreateNestedOneWithoutEventsInput {
+  connect: TrackWhereUniqueInput
+  connectOrCreate: TrackCreateOrConnectWithoutEventsInput
+  create: TrackCreateWithoutEventsInput
+}
+
+input TrackCreateOrConnectWithoutEventsInput {
+  create: TrackCreateWithoutEventsInput!
+  where: TrackWhereUniqueInput!
+}
+
+input TrackCreateWithoutEventsInput {
+  id: String
+  layout: String!
+  length: Int!
+  name: String!
+}
+
+type TrackGroupBy {
+  _avg: TrackAvgAggregate
+  _count: TrackCountAggregate
+  _max: TrackMaxAggregate
+  _min: TrackMinAggregate
+  _sum: TrackSumAggregate
+  id: String!
+  layout: String!
+  length: Int!
+  name: String!
+}
+
+type TrackMaxAggregate {
+  id: String
+  layout: String
+  length: Int
+  name: String
+}
+
+input TrackMaxOrderByAggregateInput {
+  id: SortOrder
+  layout: SortOrder
+  length: SortOrder
+  name: SortOrder
+}
+
+type TrackMinAggregate {
+  id: String
+  layout: String
+  length: Int
+  name: String
+}
+
+input TrackMinOrderByAggregateInput {
+  id: SortOrder
+  layout: SortOrder
+  length: SortOrder
+  name: SortOrder
+}
+
+input TrackOrderByWithAggregationInput {
+  _avg: TrackAvgOrderByAggregateInput
+  _count: TrackCountOrderByAggregateInput
+  _max: TrackMaxOrderByAggregateInput
+  _min: TrackMinOrderByAggregateInput
+  _sum: TrackSumOrderByAggregateInput
+  id: SortOrder
+  layout: SortOrder
+  length: SortOrder
+  name: SortOrder
+}
+
+input TrackOrderByWithRelationInput {
+  events: EventOrderByRelationAggregateInput
+  id: SortOrder
+  layout: SortOrder
+  length: SortOrder
+  name: SortOrder
+}
+
+input TrackRelationFilter {
+  is: TrackWhereInput
+  isNot: TrackWhereInput
+}
+
+enum TrackScalarFieldEnum {
+  id
+  layout
+  length
+  name
+}
+
+input TrackScalarWhereWithAggregatesInput {
+  AND: [TrackScalarWhereWithAggregatesInput!]
+  NOT: [TrackScalarWhereWithAggregatesInput!]
+  OR: [TrackScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  layout: StringWithAggregatesFilter
+  length: IntWithAggregatesFilter
+  name: StringWithAggregatesFilter
+}
+
+type TrackSumAggregate {
+  length: Int
+}
+
+input TrackSumOrderByAggregateInput {
+  length: SortOrder
+}
+
+input TrackUpdateInput {
+  events: EventUpdateManyWithoutTrackNestedInput
+  id: StringFieldUpdateOperationsInput
+  layout: StringFieldUpdateOperationsInput
+  length: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TrackUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  layout: StringFieldUpdateOperationsInput
+  length: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TrackUpdateOneRequiredWithoutEventsNestedInput {
+  connect: TrackWhereUniqueInput
+  connectOrCreate: TrackCreateOrConnectWithoutEventsInput
+  create: TrackCreateWithoutEventsInput
+  update: TrackUpdateToOneWithWhereWithoutEventsInput
+  upsert: TrackUpsertWithoutEventsInput
+}
+
+input TrackUpdateToOneWithWhereWithoutEventsInput {
+  data: TrackUpdateWithoutEventsInput!
+  where: TrackWhereInput
+}
+
+input TrackUpdateWithoutEventsInput {
+  id: StringFieldUpdateOperationsInput
+  layout: StringFieldUpdateOperationsInput
+  length: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TrackUpsertWithoutEventsInput {
+  create: TrackCreateWithoutEventsInput!
+  update: TrackUpdateWithoutEventsInput!
+  where: TrackWhereInput
+}
+
+input TrackWhereInput {
+  AND: [TrackWhereInput!]
+  NOT: [TrackWhereInput!]
+  OR: [TrackWhereInput!]
+  events: EventListRelationFilter
+  id: StringFilter
+  layout: StringFilter
+  length: IntFilter
+  name: StringFilter
+}
+
+input TrackWhereUniqueInput {
+  AND: [TrackWhereInput!]
+  NOT: [TrackWhereInput!]
+  OR: [TrackWhereInput!]
+  events: EventListRelationFilter
+  id: String
+  layout: StringFilter
+  length: IntFilter
+  name: StringFilter
 }
