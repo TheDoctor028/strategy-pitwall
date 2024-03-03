@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React from "react";
-import {ButtonVariant} from "react-bootstrap/types";
-import {useModal} from "../providers/ModalProvider.tsx";
-import {ModalCloseEvent} from "../models/modal.ts";
+import React from 'react';
+import { ButtonVariant } from 'react-bootstrap/types';
+import { useModal } from '../providers/ModalProvider.tsx';
+import { ModalCloseEvent } from '../models/modal.ts';
 
 export interface IModalButton {
     title: string;
@@ -23,28 +23,32 @@ export interface IModalFrameProps {
     buttons: IModalButton[];
 }
 
-export function ModalFrame({ props, show }: {props: IModalFrameProps, show: boolean}) {
-    const {closeModal} = useModal();
+export function ModalFrame({ props, show }: { props: IModalFrameProps; show: boolean }) {
+    const { closeModal } = useModal();
 
     const handleOnClose = (event: string) => () => {
-        if(props.onClose(event)) closeModal();
-    }
+        if (props.onClose(event)) closeModal();
+    };
 
     return (
         <Modal show={show} onHide={handleOnClose(ModalCloseEvent.Default)}>
             <Modal.Header closeButton>
                 <Modal.Title>{props.title}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                {props.body}
-            </Modal.Body>
+            <Modal.Body>{props.body}</Modal.Body>
             <Modal.Footer>
                 {props.buttons?.map((button, index) => (
-                    <Button key={index} variant={button.variant} onClick={handleOnClose(button.onClickEvent)}>
+                    <Button
+                        key={index}
+                        variant={button.variant}
+                        onClick={handleOnClose(button.onClickEvent)}
+                    >
                         {button.title}
-                    </Button>)
-                )}
+                    </Button>
+                ))}
             </Modal.Footer>
         </Modal>
     );
 }
+
+export default ModalFrame;

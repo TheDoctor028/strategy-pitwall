@@ -1,6 +1,6 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Layout from "./pages/Layout.tsx";
-import Home from "./pages/Home.tsx";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './pages/Layout.tsx';
+import Home from './pages/Home.tsx';
 
 export function Router() {
     return (
@@ -11,5 +11,7 @@ export function Router() {
                 </Route>
             </Routes>
         </BrowserRouter>
-    )
+    );
 }
+
+export default Router;

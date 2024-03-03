@@ -1,5 +1,5 @@
-import {Button, Card} from "react-bootstrap";
-import { EventCardFragment} from "../graphql/types/generated-types";
+import { Button, Card } from 'react-bootstrap';
+import { EventCardFragment } from '../graphql/types/generated-types.ts';
 
 interface IEventCardProps {
     event: EventCardFragment;
@@ -27,7 +27,8 @@ export function EventCard({ event }: IEventCardProps) {
                         <strong>Race Start Sim Time:</strong> {event.raceStartSim.toString()}
                     </Card.Text>
                     <Card.Text>
-                        <strong>Team Name:</strong> {event.team.name} ({event.team.car.name}, {event.team.car.class})
+                        <strong>Team Name:</strong> {event.team.name} ({event.team.car.name},{' '}
+                        {event.team.car.class})
                     </Card.Text>
                 </Card.Body>
                 <Button variant="primary">Open</Button>
@@ -35,3 +36,5 @@ export function EventCard({ event }: IEventCardProps) {
         </Card>
     );
 }
+
+export default EventCard;

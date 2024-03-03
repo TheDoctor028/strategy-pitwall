@@ -1,13 +1,16 @@
-import * as Formik from "formik";
-import * as yup from "yup";
-import {FormikInput} from "./formik/FormikInput.tsx";
-import {FormikSelect, SelectOption} from "./formik/FormikSelect.tsx";
-import {WithChildren} from "../models/common.ts";
-import {useGetSelectableTeamsQuery, useGetSelectableTracksQuery} from "../graphql/types/generated-types.ts";
+import * as Formik from 'formik';
+import * as yup from 'yup';
+import { FormikInput } from './formik/FormikInput.tsx';
+import { FormikSelect, SelectOption } from './formik/FormikSelect.tsx';
+import { WithChildren } from '../models/common.ts';
+import {
+    useGetSelectableTeamsQuery,
+    useGetSelectableTracksQuery,
+} from '../graphql/types/generated-types.ts';
 
 const CREATE_NEW = 'CREATE_NEW';
 
-interface RaceEventForm {
+interface IRaceEventForm {
     name: string;
     series: string;
     duration: number;
@@ -18,7 +21,7 @@ interface RaceEventForm {
     team: string;
 }
 
-const initialValues: RaceEventForm = {
+const initialValues: IRaceEventForm = {
     name: '',
     series: '',
     duration: 120,
@@ -30,45 +33,31 @@ const initialValues: RaceEventForm = {
 };
 
 const validationSchema = yup.object({
-    name: yup
-        .string()
-        .required('Name is required'),
+    name: yup.string().required('Name is required'),
     series: yup.string(),
-    duration: yup
-        .number()
-        .min(1)
-        .required('Duration is required'),
-    greenFlagOffset: yup
-        .number()
-        .min(0)
-        .required('Green flag offset is required'),
-    sessionStart: yup
-        .date()
-        .required('Session start is required'),
-    raceStartSim: yup
-        .date()
-        .required('Race Start is required'),
-    track: yup
-        .string()
-        .required('Track is required'),
-    team: yup
-        .string()
-        .required('Team is required'),
+    duration: yup.number().min(1).required('Duration is required'),
+    greenFlagOffset: yup.number().min(0).required('Green flag offset is required'),
+    sessionStart: yup.date().required('Session start is required'),
+    raceStartSim: yup.date().required('Race Start is required'),
+    track: yup.string().required('Track is required'),
+    team: yup.string().required('Team is required'),
 });
 
 function withCreateNewOption(name: string, options: SelectOption[]): SelectOption[] {
-    return [...options, {value: CREATE_NEW, text: `Create new ${name}...`}]
+    return [...options, { value: CREATE_NEW, text: `Create new ${name}...` }];
 }
 
-export function RaceEventForm({children, onSubmit }: WithChildren & { onSubmit: (values: RaceEventForm) => void }) {
+export function RaceEventForm({
+    children,
+    onSubmit,
+}: WithChildren & { onSubmit: (values: IRaceEventForm) => void }) {
     const teamsQuery = useGetSelectableTeamsQuery();
     const tracksQuery = useGetSelectableTracksQuery();
-
 
     const formik = {
         validationSchema,
         initialValues,
-        onSubmit: onSubmit
+        onSubmit,
     };
 
     return (
@@ -99,22 +88,14 @@ export function RaceEventForm({children, onSubmit }: WithChildren & { onSubmit: 
                     placeholder="Green flag offset in minutes"
                     helpText="From session start time to pass until the actual race starts"
                 />
-                <FormikInput
-                    name="sessionStart"
-                    label="Session Start"
-                    type="datetime-local"
-                />
-                <FormikInput
-                    name="raceStartSim"
-                    label="Race Start Sim"
-                    type="datetime-local"
-                />
+                <FormikInput name="sessionStart" label="Session Start" type="datetime-local" />
+                <FormikInput name="raceStartSim" label="Race Start Sim" type="datetime-local" />
 
                 <FormikSelect
-                    options={withCreateNewOption('track',
-                    tracksQuery.data?.tracks.map(
-                        t => ({value: t.name, text: t.name}))
-                        || [])}
+                    options={withCreateNewOption(
+                        'track',
+                        tracksQuery.data?.tracks.map((t) => ({ value: t.name, text: t.name })) || []
+                    )}
                     name="track"
                     label="Track"
                 />
@@ -122,10 +103,10 @@ export function RaceEventForm({children, onSubmit }: WithChildren & { onSubmit: 
                     // TODO add TrackForm here
                 }
                 <FormikSelect
-                    options={withCreateNewOption('team',
-                    teamsQuery.data?.teams.map(
-                        t => ({value: t.name, text: t.name}
-                        )) || [])}
+                    options={withCreateNewOption(
+                        'team',
+                        teamsQuery.data?.teams.map((t) => ({ value: t.name, text: t.name })) || []
+                    )}
                     name="team"
                     label="Team"
                 />
@@ -138,3 +119,5 @@ export function RaceEventForm({children, onSubmit }: WithChildren & { onSubmit: 
         </Formik.Formik>
     );
 }
+
+export default RaceEventForm;

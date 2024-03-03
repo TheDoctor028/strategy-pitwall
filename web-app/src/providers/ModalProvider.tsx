@@ -1,6 +1,6 @@
-import React, {useCallback, useContext, useState} from "react";
-import {WithChildren} from "../models/common.ts";
-import {IModalFrameProps, ModalFrame} from "../components/ModalFrame.tsx";
+import React, { useCallback, useContext, useState } from 'react';
+import { WithChildren } from '../models/common.ts';
+import { IModalFrameProps, ModalFrame } from '../components/ModalFrame.tsx';
 
 export interface IModalContext {
     props: IModalFrameProps;
@@ -19,25 +19,30 @@ const modalContextDefault: IModalContext = {
 const ModalContext = React.createContext(modalContextDefault);
 ModalContext.displayName = 'ModalContext';
 
-export function ModalProvider({children}: WithChildren) {
+export function ModalProvider({ children }: WithChildren) {
     const [show, setShow] = useState(false);
     const [props, setProps] = useState<IModalFrameProps>({} as IModalFrameProps);
-    const showModal = useCallback((props: IModalFrameProps) => {
-        setProps(props);
-        setShow(true);
-    }, [setShow, setProps]);
+    const showModal = useCallback(
+        (p: IModalFrameProps) => {
+            setProps(p);
+            setShow(true);
+        },
+        [setShow, setProps]
+    );
     const closeModal = useCallback(() => {
         setShow(false);
     }, [setShow]);
 
     return (
-        <ModalContext.Provider value={{props, show, showModal, closeModal}}>
+        <ModalContext.Provider value={{ props, show, showModal, closeModal }}>
             {children}
-            <ModalFrame props={props} show={show}/>
+            <ModalFrame props={props} show={show} />
         </ModalContext.Provider>
     );
 }
 
-export function useModal() {
+export const useModal = () => {
     return useContext(ModalContext);
-}
+};
+
+export default ModalProvider;

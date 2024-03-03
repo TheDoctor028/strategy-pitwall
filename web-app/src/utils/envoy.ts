@@ -1,4 +1,5 @@
 export class Envoy {
+    // eslint-disable-next-line class-methods-use-this
     protected effect: () => void = () => {};
 
     public on(e: () => void) {
@@ -6,6 +7,8 @@ export class Envoy {
     }
 
     public call() {
-        this.effect()
+        this.effect();
     }
 }
+
+export default Envoy;
